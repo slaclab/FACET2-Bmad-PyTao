@@ -554,7 +554,33 @@ def emittance(P, plane = "x", fraction = 0.9):
 def displayMatrix(matrix):
     display(pd.DataFrame(matrix).style.hide(axis="index").hide(axis="columns"))
 
-def getMatrix(tao, start, end, order = 1, print = False):
+def getMatrix(tao, start, end, order = 1, startOffset = 0, endOffset = 0, print = False):
+    """Return zero or first order transport matrix from start to end, with offsets. Optionally print in a human readable format"""
+    
+    startS = tao.ele_head(start)["s"] + startOffset
+    endS = tao.ele_head(end)["s"] + endOffset
+
+    #This disgusting workaround is required because PyTao implementation of taylor_map doesn't support -s mode
+    if order == 0: 
+        allStrings = tao.show(f"taylor_map -order 0 -s {startS} {endS}")
+        transportMatrix = np.array([float(str) for str in allStrings[0].split()])
+    
+    elif order == 1:
+        allStrings = tao.show(f"taylor_map -s {startS} {endS}")
+        splitStrings = [str.split() for str in allStrings]
+        transportMatrix = np.array([ [float(str) for str in row[0:6]] for row in splitStrings[2:] ])
+
+    else:
+        print("Invalid matrix order requested")
+        return
+    
+
+    if print:
+        displayMatrix(transportMatrix)
+        
+    return transportMatrix
+
+def getMatrixLEGACY(tao, start, end, order = 1, print = False):
     """Return zero or first order transport matrix from start to end. Optionally print in a human readable format"""
 
     if order == 0: 
