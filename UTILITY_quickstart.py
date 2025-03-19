@@ -598,6 +598,20 @@ def getMatrixLEGACY(tao, start, end, order = 1, print = False):
         
     return transportMatrix
 
+def setLatticeAndGetMatrix(tao, start, end, startOffset = 0, endOffset = 0, defaultSettings = None, overrideSettings = {}):
+    """
+    Load lattice based on default and override settings. Then provide the transfer matrix between two elements, optionally with offsets
+    If no defaultSettings are specified, the golden lattice from defaults.yml will be loaded
+    """
+    
+    if not defaultSettings:
+        defaultSettings = loadConfig("setLattice_configs/defaults.yml")
+        
+    setLattice(tao, **( defaultSettings | overrideSettings ) )
+   
+    return getMatrix(tao, start, end, startOffset = startOffset, endOffset = endOffset)
+
+
 def addLHmodulation(
     inputBeam, 
     #Elaser, 
