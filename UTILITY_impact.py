@@ -14,6 +14,7 @@ import os
 def runImpact(
     filePath = None,
     impactGridCount = 8,
+    impactNumProcs = 1, 
     numMacroParticles = 1e4,
     GFILESuffix = 'distgen.yaml',
     L0APhaseOffset = 0,
@@ -42,7 +43,7 @@ def runImpact(
     #Impact settings
     SETTINGS0 = {
         #'numprocs':(len(os.sched_getaffinity(0)))-1, #Number of available cores, minus one (jupyter is running in one core)
-        'numprocs':1,
+        'numprocs':impactNumProcs,
         'header:Nx':impactGridCount,
         'header:Ny':impactGridCount,  
         'header:Nz':impactGridCount, 
