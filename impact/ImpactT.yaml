@@ -7,7 +7,7 @@ group:
     - L0AF_body_1
     - L0AF_body_2
     - L0AF_exit
-    value: 344.86189124338847
+    value: 349.86189124338847
     var_name: theta0_deg
   L0AF_scale:
     absolute: true

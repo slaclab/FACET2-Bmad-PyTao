@@ -1,6 +1,6 @@
 # Typical installation 
 
-Start by setting up a Conda environment using bmadCondaEnv.yml or bmadCondaEnv_noBuilds.yml (https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html)
+Start by setting up a Conda environment using bmadCondaEnv.yml (https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html)
 
 Try executing "S3DF demo notebook.ipynb"; this should, using only a few lines, perform and plot an output from a Bmad simulation from a pre-generated lattice and beam file. It will also demonstrate some of the helper functions for changing magnet and linac settings.
 
@@ -33,18 +33,7 @@ OSError: Unable to synchronously open file (file signature not found)
 
 ## Other Conda hints
 
-If the Conda environment files don't work, from a working install run:
-`conda list --export | cut -d"=" -f1`
-
-Copy the list of packages to packages.txt. Then, on the new machine, run:
-
-`conda create --name bmad --file packages.txt -c conda-forge`
-
-It probably won't work out of the box, but it could get you close
-
-
-
-If that also doesn't work, you can try something like this...
+If the Conda environment files don't work, try:
 
 `conda install jupyter numpy matplotlib pandas`
 
