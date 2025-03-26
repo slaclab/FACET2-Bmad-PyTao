@@ -452,26 +452,76 @@ L0BEnergyOffset : -2259313 #This new beam comes out of L0A just at a tiny bit hi
 # S1ER_xOffset : -0.0001798665
 
 
-# 2025-01-22-08-53-47 CSR off, 150+/-100 um spacing, limited knobs (phases, sym sextupoles, and movers only)
+# 2025-01-22-08-53-47 CSR on, 150+/-100 um spacing, limited knobs (phases, sym sextupoles, and movers only)
 # Starting from golden
-centerBC14 : True
-centerBC20 : True
-centerMFFF : True
-assertBC14Energy : True
-assertBC20Energy : True
-symmetricSextupoleStrengths : True
-L1PhaseSet : -21.3144185407
-L2PhaseSet : -38.1483024572
-S1ELkG : 1900.8595634531
-S2ELkG : -3238.6823718946
-S3ELkG : -1079.0005998005
-S1EL_xOffset : 0.0009141513
-S1EL_yOffset : 0.0000381505
-S2EL_xOffset : -0.000351706
-S2EL_yOffset : 0.000220635
-S2ER_xOffset : -0.0001420018
-S2ER_yOffset : -0.0014447426
-S1ER_xOffset : 0.001256988
-S1ER_yOffset : -0.0009910776
+# centerBC14 : True
+# centerBC20 : True
+# centerMFFF : True
+# assertBC14Energy : True
+# assertBC20Energy : True
+# symmetricSextupoleStrengths : True
+# L1PhaseSet : -21.3144185407
+# L2PhaseSet : -38.1483024572
+# S1ELkG : 1900.8595634531
+# S2ELkG : -3238.6823718946
+# S3ELkG : -1079.0005998005
+# S1EL_xOffset : 0.0009141513
+# S1EL_yOffset : 0.0000381505
+# S2EL_xOffset : -0.000351706
+# S2EL_yOffset : 0.000220635
+# S2ER_xOffset : -0.0001420018
+# S2ER_yOffset : -0.0014447426
+# S1ER_xOffset : 0.001256988
+# S1ER_yOffset : -0.0009910776
 #Probably still some room to improve
 # Drive: 22 x 20 x 17 um; Witness: 14 x 14 x 7 um; 137 um spacing
+
+
+
+# PENDING CSR on, 150+/-100 um spacing, limited knobs (phases, sym sextupoles, and movers only)
+# centerBC14 : True
+# centerBC20 : True
+# centerMFFF : True
+# assertBC14Energy : True
+# assertBC20Energy : True
+# symmetricSextupoleStrengths : True
+# L1PhaseSet : -20.0967276269
+# L2PhaseSet : -36.0687121502
+# S1ELkG : 1409.0512258526
+# S2ELkG : -4177.8701843908
+# S3ELkG : -576.6711808423
+# S1EL_xOffset : 0.002170085
+# S1EL_yOffset : -0.00026119
+# S2EL_xOffset : 0.0005208554
+# S2EL_yOffset : -0.0003425609
+# S2ER_xOffset : 0.0003275352
+# S2ER_yOffset : 0.0012806666
+# S1ER_xOffset : 0.0012961671
+# S1ER_yOffset : 0.0015382991
+
+
+centerBC14 : False
+centerBC20 : False
+centerMFFF : False
+assertBC14Energy : False
+assertBC20Energy : False
+symmetricSextupoleStrengths : True
+L1PhaseSet : -20.6072155143
+L2PhaseSet : -35.6380729126
+L2EnergyOffset : -6.719616844577795e+6
+L3EnergyOffset : 1.2036667777110757e+7
+S1ELkG : 1935.6782997966
+S2ELkG : -3819.314069499
+S3ELkG : -1080.0803442437
+S1EL_xOffset : 0.0009271535
+S1EL_yOffset : 0.0001255816
+S2EL_xOffset : -0.0003641476
+S2EL_yOffset : 0.0001834578
+S2ER_xOffset : -0.0001658843
+S2ER_yOffset : -0.0013474877
+S1ER_xOffset : 0.0013205098
+S1ER_yOffset : -0.0010246865
+XC1FFkG : 0.002435485
+XC3FFkG : 0.0012121867
+YC1FFkG : -0.0064688604
+YC2FFkG : 0.0011896608
