@@ -1,4 +1,0 @@
-call, file = f2_elec.lat.bmad
-
-patch_sector20: patch, E_tot_set=8.0e9, superimpose, ref=begff20
-

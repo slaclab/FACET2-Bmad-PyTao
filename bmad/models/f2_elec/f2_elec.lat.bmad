@@ -24,6 +24,7 @@ call, file = $FACET2_LATTICE/bmad/master/F2_ELEC.bmad
 call, file = $FACET2_LATTICE/bmad/master/FACET2e_devicenames.bmad
 
 patch_sector20: patch, superimpose, ref=begff20
+patch_bc20: patch, superimpose, ref=begbc20
 
 ! ! MRK0F (near PR10571)
 ! QA10361[K1] = -9.99949223070979443E+000
@@ -74,4 +75,3 @@ beginning[e_tot] = 6e6
 !beginning[s] = 0.426796 + .015 - (4.908185 - 4.908934)
 
 lcavity::*[num_steps] = 50
-!bmad_com[absolute_time_tracking]=t
