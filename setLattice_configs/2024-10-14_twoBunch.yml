@@ -500,28 +500,31 @@ L0BEnergyOffset : -2259313 #This new beam comes out of L0A just at a tiny bit hi
 # S1ER_yOffset : 0.0015382991
 
 
+#2025-03-31-13-46-38 CSR on, 150+/-50 um spacing, limited knobs
+#Center and energy asserts disabled!
 centerBC14 : False
 centerBC20 : False
 centerMFFF : False
 assertBC14Energy : False
 assertBC20Energy : False
 symmetricSextupoleStrengths : True
-L1PhaseSet : -20.6072155143
-L2PhaseSet : -35.6380729126
-L2EnergyOffset : -6.719616844577795e+6
-L3EnergyOffset : 1.2036667777110757e+7
-S1ELkG : 1935.6782997966
-S2ELkG : -3819.314069499
-S3ELkG : -1080.0803442437
-S1EL_xOffset : 0.0009271535
-S1EL_yOffset : 0.0001255816
-S2EL_xOffset : -0.0003641476
-S2EL_yOffset : 0.0001834578
-S2ER_xOffset : -0.0001658843
-S2ER_yOffset : -0.0013474877
-S1ER_xOffset : 0.0013205098
-S1ER_yOffset : -0.0010246865
-XC1FFkG : 0.002435485
-XC3FFkG : 0.0012121867
-YC1FFkG : -0.0064688604
-YC2FFkG : 0.0011896608
+L1PhaseSet : -20.2889213421
+L2PhaseSet : -35.5447801603
+L2EnergyOffset : -6.817565553821569e+6
+L3EnergyOffset : 1.1703527144314773e+7
+S1ELkG : 2089.4846449653
+S2ELkG : -3954.374460403
+S3ELkG : -1087.9568814486
+S1EL_xOffset : 0.0009068268
+S1EL_yOffset : 0.0001315754
+S2EL_xOffset : -0.000388583
+S2EL_yOffset : 0.0001165775
+S2ER_xOffset : -0.0001679111
+S2ER_yOffset : -0.0014881668
+S1ER_xOffset : 0.0013323302
+S1ER_yOffset : -0.0011182646
+XC1FFkG : 0.0023982219
+XC3FFkG : 0.0015344214
+YC1FFkG : -0.0053321184
+YC2FFkG : -0.0035512385
+# Drive: 23 x 20 x 20 um; Witness: 20 x 20 x 9 um; 200 um spacing
