@@ -458,8 +458,7 @@ def writeBeam(P, fileName):
     """ Writes the beam as an h5 with E. Cropp's timeOffset fix """
     P.write(fileName)
     
-    #2025-04-07 Disabling OpenPMD_to_Bmad in response to upgrade to Bmad package
-    #OpenPMD_to_Bmad(fileName)
+    OpenPMD_to_Bmad(fileName)
 
 def makeBeamActiveBeamFile(P, tao = None):
     #Weird structure on this function for backwards compatiblity. If no tao object is provided, put the beam in the nominal location. Otherwise, put it in the right place
