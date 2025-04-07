@@ -1,0 +1,90 @@
+include: 
+- "setLattice_configs/defaults.yml"
+- "setLattice_configs/bounds.yml"
+
+#Two island study: https://docs.google.com/presentation/d/1FfaVf_9RHbaN0NZ-oewsK7TWsEsQt-l1gWrt-4Edlfc/edit#slide=id.g34042655758_0_0
+
+
+####################
+########################################
+############################################################
+################################################################################
+####################################################################################################
+########################################################################################################################
+
+#2024-10-22: New IMPACT one-bunch
+
+########################################################################################################################
+####################################################################################################
+################################################################################
+############################################################
+########################################
+####################
+
+#2024-10-22-15-20-50 2024-10-22_oneBunch optimization on PR10571.
+    # twissCalculationFraction : 0.7
+    # PSystem_emitSI_x : 2.7609e-6
+    # PSystem_emitSI_y : 2.1442e-6
+    # PSystem_norm_emit_x : 1.2512e-6
+    # PSystem_norm_emit_y : 1.0193e-6
+    # PSystem_BMAG_x : 1.0001451679
+    # PSystem_BMAG_y : 1.0001521435
+    # PSystem_BMAG_emit_x : 1.2514e-6
+    # PSystem_BMAG_emit_y : 1.0195e-6
+    # PSystem_BMAG_emitSI_x : 2.7613e-6
+    # PSystem_BMAG_emitSI_y : 2.1446e-6
+inputBeamFilePathSuffix : '/beams/2024-10-22_Impact_OneBunch/2024-10-22_oneBunch.h5'
+bunchCount : 1
+QA10361kG : -3.1976079537
+QA10371kG : 3.1129092742
+QE10425kG : -6.8469996218
+QE10441kG : 1.5057761462
+QE10511kG : 7.0138622173
+QE10525kG : -5.3942250594
+L0BPhaseSet : -15.0
+L0BEnergyOffset : -2759313 #2024-10-22_oneBunch comes out of L0A just at a tiny bit higher energy. Compensate in L0B to get to the design 125 MeV
+
+
+
+
+# 2025-04-06-07-59-09 One bunch, CSR OFF! <5 um length constraint. Otherwise optimize spot
+# Starting from 2025-04-04-17-12-55
+# Limited optimization 
+# centerBC14 : True
+# centerBC20 : True
+# centerMFFF : True
+# assertBC14Energy : True
+# assertBC20Energy : True
+# symmetricSextupoleStrengths : True
+# L1PhaseSet : -29.8968907035
+# L2PhaseSet : -41.7271714644
+# S1ELkG : 137.7504509524
+# S2ELkG : -921.6058349037
+# S3ELkG : -642.5602190847
+# S1EL_xOffset : 0.0036362126
+# S1EL_yOffset : -0.0006244894
+# S2EL_xOffset : 0.0016381707
+# S2EL_yOffset : 0.0000385292
+# S2ER_xOffset : 0.0011570029
+# S2ER_yOffset : -3.797e-7
+# S1ER_xOffset : 0.0028245459
+# S1ER_yOffset : 0.0002465706
+#PENT: 11 x 7.0 x 4.1 um
+
+
+
+centerBC14 : True
+centerBC20 : True
+centerMFFF : True
+assertBC14Energy : True
+assertBC20Energy : True
+symmetricSextupoleStrengths : True
+# L1PhaseSet : -29.8968907035
+# L2PhaseSet : -41.7271714644
+
+
+
+# Top island, -30.5/-43.0
+L1PhaseSet : -30.5
+L2PhaseSet : -43.0
+

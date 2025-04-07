@@ -945,6 +945,7 @@ def getBeamSpecs(P, targetTwiss = None):
 
         savedData[f"{PActiveStr}_median_xp"] = np.median(PActive.xp)
         savedData[f"{PActiveStr}_median_yp"] = np.median(PActive.yp)
+        savedData[f"{PActiveStr}_median_energy"] = np.median(PActive.energy)
         
         savedData[f"{PActiveStr}_sigmaSI90_x"] = smallestIntervalImpliedSigma(PActive.x, percentage = 0.90)
         savedData[f"{PActiveStr}_sigmaSI90_y"] = smallestIntervalImpliedSigma(PActive.y, percentage = 0.90)
@@ -952,6 +953,7 @@ def getBeamSpecs(P, targetTwiss = None):
 
         savedData[f"{PActiveStr}_sigmaSI90_xp"] = smallestIntervalImpliedSigma(PActive.xp, percentage = 0.90)
         savedData[f"{PActiveStr}_sigmaSI90_yp"] = smallestIntervalImpliedSigma(PActive.yp, percentage = 0.90)
+        savedData[f"{PActiveStr}_sigmaSI90_energy"] = smallestIntervalImpliedSigma(PActive.energy, percentage = 0.90)
 
         savedData[f"{PActiveStr}_emitSI90_x"] = smallestIntervalImpliedEmittance(PActive, plane = "x", percentage = 0.90)
         savedData[f"{PActiveStr}_emitSI90_y"] = smallestIntervalImpliedEmittance(PActive, plane = "y", percentage = 0.90)

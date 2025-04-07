@@ -1065,12 +1065,12 @@ L0BEnergyOffset : -2759313 #2024-10-22_oneBunch comes out of L0A just at a tiny 
 
 #2025-03-18-09-31-18 One bunch, CSR on. <5 um length constraint. Otherwise optimize spot
 #Allow asym sextupoles. Allow BC20 quads but not FF quads
-centerBC14 : True
-centerBC20 : True
-centerMFFF : True
-assertBC14Energy : True
-assertBC20Energy : True
-symmetricSextupoleStrengths : False
+# centerBC14 : True
+# centerBC20 : True
+# centerMFFF : True
+# assertBC14Energy : True
+# assertBC20Energy : True
+# symmetricSextupoleStrengths : False
 # L1PhaseSet : -26.5133471429
 # L2PhaseSet : -39.3450450004
 # Q1EkG : 113.7850217773
@@ -1119,28 +1119,28 @@ symmetricSextupoleStrengths : False
 # S1ER_yOffset : 0.0001504255
 # Final beam:22 x 12 x 6.3 um
 #2025-03-20-13-31-17
-L1PhaseSet : -28.6796281189
-L2PhaseSet : -38.601273087
-Q1EkG : 69.046035604
-Q2EkG : -146.0604538986
-Q3EkG : 121.9279146167
-Q4EkG : 107.4140967204
-Q5EkG : -12.6396534273
-Q6EkG : -142.5756271545
-S1ELkG : 634.1094360085
-S2ELkG : -5139.2898899812
-S3ELkG : -1255.497215085
-S3ERkG : -835.7688711043
-S2ERkG : -8365.0346933305
-S1ERkG : 783.7386030586
-S1EL_xOffset : 0.0003890294
-S1EL_yOffset : -0.0002307633
-S2EL_xOffset : 0.0007217045
-S2EL_yOffset : -0.0007807964
-S2ER_xOffset : 0.0003487586
-S2ER_yOffset : 0.0003850494
-S1ER_xOffset : -0.0022374603
-S1ER_yOffset : 0.0001603869
+# L1PhaseSet : -28.6796281189
+# L2PhaseSet : -38.601273087
+# Q1EkG : 69.046035604
+# Q2EkG : -146.0604538986
+# Q3EkG : 121.9279146167
+# Q4EkG : 107.4140967204
+# Q5EkG : -12.6396534273
+# Q6EkG : -142.5756271545
+# S1ELkG : 634.1094360085
+# S2ELkG : -5139.2898899812
+# S3ELkG : -1255.497215085
+# S3ERkG : -835.7688711043
+# S2ERkG : -8365.0346933305
+# S1ERkG : 783.7386030586
+# S1EL_xOffset : 0.0003890294
+# S1EL_yOffset : -0.0002307633
+# S2EL_xOffset : 0.0007217045
+# S2EL_yOffset : -0.0007807964
+# S2ER_xOffset : 0.0003487586
+# S2ER_yOffset : 0.0003850494
+# S1ER_xOffset : -0.0022374603
+# S1ER_yOffset : 0.0001603869
 #Final beam: 66 x 13 x 5 um
 
 
@@ -1182,16 +1182,61 @@ S1ER_yOffset : 0.0001603869
 #Gets to 10 x 7 x 4 um
 
 
-#2025-03-10-14-16-39 Demo sextupole mover fix
-# S1EL_xOffset : 0.0010128672
-# S1EL_yOffset : 0.000425045
-# S2EL_xOffset : -0.0033194026
-# S2EL_yOffset : -0.0011502482
-# S2ER_xOffset : -0.0001889776
-# S2ER_yOffset : 0.0039993966
-# S1ER_xOffset : 0.003123353
-# S1ER_yOffset : -0.0031670003
+#2025-04-04-16-50-15 One bunch, CSR off. Very, very simplified example of minimizing spot using only sextupole strengths
+# See "2025-04-04 BC20 hand tuning - centering flags off.ipynb" and (for the centering-flags-on case) https://docs.google.com/presentation/d/1_tTbtfsk7JGuZzMHAChQvjmprNiZ_kpbAE3oubUk5e0/edit#slide=id.g3402aded609_0_4
+# centerBC14 : False
+# centerBC20 : False
+# centerMFFF : False
+# assertBC14Energy : False
+# assertBC20Energy : False
+# symmetricSextupoleStrengths : True
+# L1PhaseSet :    -21.9
+# L1EnergyOffset: 0
+# L2PhaseSet :    -35
+# L2EnergyOffset: 81.0e+6
+# L3PhaseSet :    2
+# L3EnergyOffset: 80.0e+6
+# S1ELkG : 2587.02748725
+# S2ELkG : -2955.9719559
+# S3ELkG : -2141.74217062
 
+#2025-04-04-17-12-55 One bunch, CSR off. Very, very simplified example of minimizing spot using only sextupole strengths
+# See "2025-04-04 BC20 hand tuning.ipynb" andhttps://docs.google.com/presentation/d/1_tTbtfsk7JGuZzMHAChQvjmprNiZ_kpbAE3oubUk5e0/edit#slide=id.g3402aded609_0_4
+# centerBC14 : True
+# centerBC20 : True
+# centerMFFF : True
+# assertBC14Energy : True
+# assertBC20Energy : True
+# symmetricSextupoleStrengths : True
+# L1PhaseSet :    -22
+# L2PhaseSet :    -39
+# S1ELkG : 1.11394347
+# S2ELkG : -4581.69980
+# S3ELkG : -2563.13841
+
+# 2025-04-06-07-59-09 One bunch, CSR OFF! <5 um length constraint. Otherwise optimize spot
+# Starting from 2025-04-04-17-12-55
+# Limited optimization 
+centerBC14 : True
+centerBC20 : True
+centerMFFF : True
+assertBC14Energy : True
+assertBC20Energy : True
+symmetricSextupoleStrengths : True
+L1PhaseSet : -29.8968907035
+L2PhaseSet : -41.7271714644
+S1ELkG : 137.7504509524
+S2ELkG : -921.6058349037
+S3ELkG : -642.5602190847
+S1EL_xOffset : 0.0036362126
+S1EL_yOffset : -0.0006244894
+S2EL_xOffset : 0.0016381707
+S2EL_yOffset : 0.0000385292
+S2ER_xOffset : 0.0011570029
+S2ER_yOffset : -3.797e-7
+S1ER_xOffset : 0.0028245459
+S1ER_yOffset : 0.0002465706
+#PENT: 11 x 7.0 x 4.1 um
 
 
 
