@@ -44,6 +44,7 @@ def initializeTao(
     runImpactTF = False,
     scratchPath = None,
     randomizeFileNames = False,
+    transverseWakes = False,
     **kwargs
 ):
 
@@ -69,7 +70,12 @@ def initializeTao(
     #######################################################################
     #Launch and configure Tao
     #######################################################################
-    tao=Tao('-init {:s}/bmad/models/f2_elec/tao.init -noplot'.format(environ['FACET2_LATTICE'])) 
+    if transverseWakes: 
+        print("Transverse wakes enabled!")
+        tao=Tao('-init {:s}/bmad/models/f2_elec/tao_transverseWakesOn.init -noplot'.format(environ['FACET2_LATTICE'])) 
+    else:
+        tao=Tao('-init {:s}/bmad/models/f2_elec/tao.init -noplot'.format(environ['FACET2_LATTICE'])) 
+    
     tao.cmd("set beam add_saved_at = DTOTR, XTCAVF, M2EX, PR10571, PR10711, CN2069") #The beam is saved at all MARKER elements already; this list just supplements
 
 
@@ -188,6 +194,7 @@ def trackBeam(
     trackStart = "L0AFEND",
     trackEnd = "end",
     laserHeater = False,
+    centerDL10 = False,
     centerBC14 = False,
     assertBC14Energy = False,
     centerBC20 = False,
@@ -227,6 +234,7 @@ def trackBeam(
     trackStartS  = tao.ele_param(trackStart,"ele.s")['ele_s']
     trackEndS    = tao.ele_param(trackEnd,"ele.s")['ele_s']
     laserHeaterS = tao.ele_param("HTRUNDF","ele.s")['ele_s']
+    DL10ENDS     = tao.ele_param("ENDDL10","ele.s")['ele_s']
     BC14BEGS     = tao.ele_param("BEGBC14_1","ele.s")['ele_s']
     BC20BEGS     = tao.ele_param("BEGBC20","ele.s")['ele_s']
     BC20COLLS    = tao.ele_param("CN2069","ele.s")['ele_s']
@@ -256,6 +264,28 @@ def trackBeam(
         tao.cmd(f'set beam_init track_end = {trackEnd}')
         if verbose: print(f"Set track_start = HTRUNDF, track_end = {trackEnd}")
 
+    if centerDL10 and trackStartS < DL10ENDS < trackEndS:
+        tao.cmd(f'set beam_init track_end = ENDDL10')
+        if verbose: print(f"Set track_end = ENDDL10")
+
+        if verbose: print(f"Tracking!")
+        trackBeamHelper(tao)
+
+        P = getBeamAtElement(tao, "ENDDL10", tToZ = False)
+
+        PMod = centerBeam(P)
+        
+        writeBeam(PMod, tao.patchFilePath)
+        if verbose: print(f"Beam centered at ENDDL10 written to {tao.patchFilePath}")
+
+        tao.cmd(f'set beam_init position_file={tao.patchFilePath}')
+        tao.cmd('reinit beam')
+        if verbose: print(f"Loaded {tao.patchFilePath}")
+
+        tao.cmd(f'set beam_init track_start = ENDDL10')
+        tao.cmd(f'set beam_init track_end = {trackEnd}')
+        if verbose: print(f"Set track_start = ENDDL10, track_end = {trackEnd}")
+    
     if centerBC14 and trackStartS < BC14BEGS < trackEndS:
         tao.cmd(f'set beam_init track_end = BEGBC14_1')
         if verbose: print(f"Set track_end = BEGBC14_1")
@@ -388,6 +418,7 @@ def trackBeamHelper(tao):
         
 
 def getBeamAtElement(tao, eleString, tToZ = True):
+    """Off-label use: Can also pass the element index as an int rather than a string"""
     P = ParticleGroup(data=tao.bunch_data(eleString))
     P = P[P.status == 1]
 

@@ -1,0 +1,15 @@
+! Adapted from file: 	longitudinal_wakes_sband.bmad
+! Usage: 
+! ele[sr_wake] = call::longitudinal_wakes_sband.bmad
+! 2025-04-14 NMM adding transverse wakes
+! Don't trust me! Coefficients from "2024-11-06 Looking at linac wakes.nb"
+
+{
+  scale_with_length = T, 
+  longitudinal = {1.0214527206425931e14, 200.737972823806, 0, 0.25, none},
+  longitudinal = {2.0264683145205535e13, 164752.58575866005, 0, 0.25, none},
+  longitudinal = {9.111515497722739e13, 1206.8246815698092, 0, 0.25, none},
+  longitudinal = {4.95817609185586e13, 9050.772842025624, 0, 0.25, none},
+  transverse = {3.36123e15, -39.2988, 0, 0.25, none, leading},
+  transverse = {-3.36123e15, 724.095, 0, 0.25, none, leading},
+z_max = 0.01}
