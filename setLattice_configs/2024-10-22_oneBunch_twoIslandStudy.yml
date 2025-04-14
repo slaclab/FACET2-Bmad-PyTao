@@ -79,12 +79,113 @@ centerMFFF : True
 assertBC14Energy : True
 assertBC20Energy : True
 symmetricSextupoleStrengths : True
-# L1PhaseSet : -29.8968907035
-# L2PhaseSet : -41.7271714644
 
 
 
-# Top island, -30.5/-43.0
-L1PhaseSet : -30.5
-L2PhaseSet : -43.0
+# 2025-04-09-13-21-55 Top island CSR OFF, -30.5/-43.0
+# L1PhaseSet : -30.5
+# L2PhaseSet : -43.0
+# S1ELkG : 2266.2269181157
+# S2ELkG : -40.3178254004
+# S3ELkG : -1653.3961944189
+# S1EL_xOffset : -0.0012240149
+# S1EL_yOffset : 0.0000126816
+# S2EL_xOffset : 0.0034458145
+# S2EL_yOffset : -0.0010911758
+# S2ER_xOffset : -0.0025926641
+# S2ER_yOffset : 0.0012230202
+# S1ER_xOffset : -0.0020950523
+# S1ER_yOffset : 0.0000358856
 
+
+# 2025-04-09-13-51-14 Top island CSR OFF, -29.5/-41.0
+# L1PhaseSet : -29.5
+# L2PhaseSet : -41.0
+# S1ELkG : 16.0941171098
+# S2ELkG : -411.1550517668
+# S3ELkG : -65.1084248617
+# S1EL_xOffset : -0.0013772824
+# S1EL_yOffset : -0.0006069614
+# S2EL_xOffset : 0.0038883137
+# S2EL_yOffset : -0.00029307
+# S2ER_xOffset : 0.0022264328
+# S2ER_yOffset : 0.0002651148
+# S1ER_xOffset : -0.0035359009
+# S1ER_yOffset : -0.0000774269
+
+# 2025-04-09-15-22-44 Top island CSR OFF, -28.5/-39.5
+# L1PhaseSet : -28.5
+# L2PhaseSet : -39.5
+# S1ELkG : 86.5542237458
+# S2ELkG : -67.0109956596
+# S3ELkG : -1755.6680366273
+# S1EL_xOffset : 0.0010533402
+# S1EL_yOffset : 0.0000386193
+# S2EL_xOffset : -0.0015125292
+# S2EL_yOffset : 0.0029799028
+# S2ER_xOffset : 0.0009555631
+# S2ER_yOffset : 0.0001076247
+# S1ER_xOffset : 0.0021632342
+# S1ER_yOffset : -0.0001363339
+
+
+# 2025-04-09-16-19-41 Bottom island CSR OFF, -29/-45.5
+# L1PhaseSet : -29
+# L2PhaseSet : -45.5
+# S1ELkG : 180.9749224707
+# S2ELkG : -2276.8078604356
+# S3ELkG : -182.8682192552
+# S1EL_xOffset : 0.001376673
+# S1EL_yOffset : 0.0033964823
+# S2EL_xOffset : 0.0003655481
+# S2EL_yOffset : 0.0006806503
+# S2ER_xOffset : 0.000429936
+# S2ER_yOffset : -0.0000789636
+# S1ER_xOffset : -0.0004218529
+# S1ER_yOffset : -0.0008897201
+
+# 2025-04-09-18-04-59 Bottom island CSR OFF, -28/-43.5
+# L1PhaseSet : -28
+# L2PhaseSet : -43.5
+# S1ELkG : 36.8377830773
+# S2ELkG : -2459.6461597848
+# S3ELkG : -1335.4823520329
+# S1EL_xOffset : 0.0012336295
+# S1EL_yOffset : 0.0038830861
+# S2EL_xOffset : 0.000571577
+# S2EL_yOffset : 0.0001713549
+# S2ER_xOffset : 0.0008644794
+# S2ER_yOffset : 0.000028122
+# S1ER_xOffset : 0.0003610022
+# S1ER_yOffset : 0.0005658865
+
+# 2025-04-09-19-41-24 Bottom island CSR OFF, -25.5/-40.5
+# L1PhaseSet : -25.5
+# L2PhaseSet : -40.5
+# S1ELkG : 199.6172012812
+# S2ELkG : -2835.7932333598
+# S3ELkG : -1509.5409225737
+# S1EL_xOffset : 0.001104449
+# S1EL_yOffset : -0.0004481716
+# S2EL_xOffset : 0.0007930973
+# S2EL_yOffset : -0.0001115433
+# S2ER_xOffset : 0.0012539994
+# S2ER_yOffset : 0.0005428733
+# S1ER_xOffset : 0.0022305941
+# S1ER_yOffset : 0.0032600893
+
+# 2025-04-11-14-14-41 Top island CSR ON, -29.5/-41.0 +/- 1
+L1PhaseSet : -29.850082584
+L2PhaseSet : -40.3703761325
+S1ELkG : 1118.6190304326
+S2ELkG : -4141.8197088714
+S3ELkG : -1972.5971307246
+S1EL_xOffset : -0.0011186987
+S1EL_yOffset : -0.0014510857
+S2EL_xOffset : -0.0023392467
+S2EL_yOffset : 0.0006624517
+S2ER_xOffset : -0.0002789598
+S2ER_yOffset : -0.0012120072
+S1ER_xOffset : 0.0020699964
+S1ER_yOffset : -0.0020722803
+#Incomplete optimization

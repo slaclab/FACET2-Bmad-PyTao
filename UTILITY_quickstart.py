@@ -898,14 +898,14 @@ def getBeamSpecs(P, targetTwiss = None):
                 targetAlphaX = -2.1
                 targetAlphaY = 0.0
                 
-            if targetTwiss == "BEGBC20":
+            elif targetTwiss == "BEGBC20":
                 #BEGBC20 lucretia live model lattice 2024-10-16
                 targetBetaX = 11.5
                 targetBetaY = 27.3
                 targetAlphaX = 0.7
                 targetAlphaY = 1.2
             
-            if targetTwiss == "MFFF":
+            elif targetTwiss == "MFFF":
                 #MFFF lucretia live model lattice 2024-10-16
                 targetBetaX = 11.6
                 targetAlphaX = -0.64
@@ -920,7 +920,7 @@ def getBeamSpecs(P, targetTwiss = None):
                 targetAlphaY = 0.0
 
             else:
-                #print("Not a valid treaty point. Aborting")
+                print("Not a valid treaty point. Aborting")
                 #return
 
                 
