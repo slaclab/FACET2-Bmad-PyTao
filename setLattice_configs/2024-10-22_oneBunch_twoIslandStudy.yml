@@ -174,18 +174,59 @@ symmetricSextupoleStrengths : True
 # S1ER_xOffset : 0.0022305941
 # S1ER_yOffset : 0.0032600893
 
-# 2025-04-11-14-14-41 Top island CSR ON, -29.5/-41.0 +/- 1
-L1PhaseSet : -29.850082584
-L2PhaseSet : -40.3703761325
-S1ELkG : 1118.6190304326
-S2ELkG : -4141.8197088714
-S3ELkG : -1972.5971307246
-S1EL_xOffset : -0.0011186987
-S1EL_yOffset : -0.0014510857
-S2EL_xOffset : -0.0023392467
-S2EL_yOffset : 0.0006624517
-S2ER_xOffset : -0.0002789598
-S2ER_yOffset : -0.0012120072
-S1ER_xOffset : 0.0020699964
-S1ER_yOffset : -0.0020722803
-#Incomplete optimization
+# 2025-04-17-18-39-08-INCOMPLETE Top island CSR ON, -29.5/-41.0 +/- 1
+# L1PhaseSet : -29.8556820972
+# L2PhaseSet : -40.3623638841
+# S1ELkG : 1159.52725513
+# S2ELkG : -3801.0453652409
+# S3ELkG : -1980.5829919112
+# S1EL_xOffset : -0.0012253443
+# S1EL_yOffset : -0.0013869576
+# S2EL_xOffset : -0.0023376621
+# S2EL_yOffset : 0.0005066835
+# S2ER_xOffset : -0.0003404739
+# S2ER_yOffset : -0.0010164428
+# S1ER_xOffset : 0.0020155875
+# S1ER_yOffset : -0.0021742004
+#Incomplete optimization. 48 x 14 x 5 um
+
+#2025-04-18-10-40-25 Top island CSR on
+#Optimization from fixed phase and centered sextuples; changing sextupole strength only. Reasonably high confidence that this optimization run found global optimum; employed large population (50) full parameter space ("uniform") DE
+# 5 um length seemed to be JUST outside the range of possibility; changing constraint to 6 um ONLY for this case
+# L1PhaseSet : -29.5
+# L2PhaseSet : -41
+# S1ELkG : 8.0115286725
+# S2ELkG : -1939.9824375316
+# S3ELkG : -454.2447387444
+
+#2025-04-18-12-44-00 Top island CSR
+#Optimization with fixed phase. N-M of sextupole strengths and movers, starting from 2025-04-18-10-40-25
+L1PhaseSet : -29.5
+L2PhaseSet : -41
+S1ELkG : 45.94277598
+S2ELkG : -2896.7721959126
+S3ELkG : -386.3633298638
+S1EL_xOffset : -0.0000164107
+S1EL_yOffset : -0.0001164661
+S2EL_xOffset : -0.0007221524
+S2EL_yOffset : 0.0000494099
+S2ER_xOffset : 0.0002134529
+S2ER_yOffset : 0.0002790287
+S1ER_xOffset : 0.0000585785
+S1ER_yOffset : 0.0002014729
+
+# 2025-04-19-07-26-16-INCOMPLETE Top island CSR ON, -29.5/-41.0 +/- 1
+L1PhaseSet : -29.8468028109
+L2PhaseSet : -40.4676460034
+S1ELkG : 209.0684650767
+S2ELkG : -2247.9176927407
+S3ELkG : -1401.8165327565
+S1EL_xOffset : -0.000639576
+S1EL_yOffset : -0.0034613661
+S2EL_xOffset : -0.0033192194
+S2EL_yOffset : -0.0024896306
+S2ER_xOffset : -0.0018343582
+S2ER_yOffset : -0.0012995615
+S1ER_xOffset : 0.000291516
+S1ER_yOffset : -0.0009120653
+#Incomplete optimization. 54 x 16 x 5 um
