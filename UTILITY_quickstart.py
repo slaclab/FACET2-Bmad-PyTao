@@ -1182,3 +1182,26 @@ def disableAutoQuadEnergyCompensation(tao):
     tao.cmd("set ele QUAD::* FIELD_MASTER = T")
 
     return
+
+def disableAutoMagnetEnergyCompensation(tao):
+    """
+    The golden lattice, by default, has the magnets set according to the design K# rather than a fixed field.
+    For "typical" simulations, this is a good approach. It's basically assuming that we LEM the machine
+    For some edge cases, like jitter simulations, we don't want the magnets to be changing though
+
+    This function may not be exhaustive... beware!
+    """ 
+    
+    tao.cmd("set ele Solenoid::* FIELD_MASTER = T")
+    
+    tao.cmd("set ele Sbend::* FIELD_MASTER = T")
+    tao.cmd("set ele Quadrupole::* FIELD_MASTER = T")
+    tao.cmd("set ele Sextupole::* FIELD_MASTER = T")
+    tao.cmd("set ele Multipole::* FIELD_MASTER = T")
+
+    tao.cmd("set ele Wiggler::* FIELD_MASTER = T")
+
+    tao.cmd("set ele VKicker::* FIELD_MASTER = T")
+    tao.cmd("set ele HKicker::* FIELD_MASTER = T")
+
+    return

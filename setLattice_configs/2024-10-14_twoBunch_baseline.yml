@@ -45,7 +45,7 @@ L0BPhaseSet : -15.0  #By eye, this "feels" right... it should be a fit parameter
 L0BEnergyOffset : -2259313 #This new beam comes out of L0A just at a tiny bit higher energy. Compensate in L0B to get to the design 125 MeV
 
 
-
+#2024-10-14_twoBunch_baseline.yml
 #2025-03-31-13-46-38 CSR on, 150+/-50 um spacing, limited knobs
 #Center and energy asserts disabled!
 centerBC14 : False
