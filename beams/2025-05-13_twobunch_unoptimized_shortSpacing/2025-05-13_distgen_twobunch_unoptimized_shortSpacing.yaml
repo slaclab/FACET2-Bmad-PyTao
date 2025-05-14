@@ -1,0 +1,75 @@
+species: electron
+n_particle: 1000000
+
+random_type: hammersley
+
+start:
+    type: cathode
+    MTE:
+        value: 400
+        units: meV
+        
+total_charge:
+    value: 2100 #Nominal was 1600
+    units: pC
+
+# xy_dist:
+#     type: file2d
+#     file: 'VCC.jpeg'
+#     max_x:
+#         value: 2.808
+#         units: mm
+#     max_y:
+#         value: 2.808
+#         units: mm
+#     min_x:
+#         value: -2.808
+#         units: mm
+#     min_y:
+#         value: -2.808
+#         units: mm
+    
+          
+r_dist:
+    type: radial_gaussian #radial_uniform
+    # For radial_gaussian, allowed params: ['sigma_xy', 'truncation_fraction', 'truncation_radius_left', 'truncation_radius_right', 'n_sigma_cutoff_left', 'n_sigma_cutoff_left', 'n_sigma_cutoff', 'truncation_radius', 'truncation_radius_left', 'truncation_radius_right', 'verbose', 'type', 'indent']
+    sigma_xy:
+        value: 1.49
+        units: mm
+    truncation_radius:
+        value: 2.52
+        units: mm
+        
+#t_dist:
+#  type: gaussian
+#  avg_t:
+#    units: ps
+#    value: 0
+#  sigma_t:
+#    units: ps
+#    value: 1.17 #0.9341825902335456 #2.2/2.355
+#  n_sigma_cutoff: 3
+
+
+t_dist:
+  dists:
+    d1:
+      avg_t:
+        units: ps
+        value: 0.0
+      sigma_t:
+        units: ps
+        value: 1.17 #0.9341825902335456 #2.2/2.355
+      type: gaussian
+    d2:
+      avg_t:
+        units: ps
+        value: 5.0 #Nominal was 9.0 ps
+      sigma_t:
+        units: ps
+        value: 1.17 #0.9341825902335456 #2.2/2.355
+      type: gaussian
+  type: superposition
+  weights:
+    d1: 0.25
+    d2: 0.75
