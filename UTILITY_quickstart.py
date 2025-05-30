@@ -23,7 +23,7 @@ import pmd_beamphysics.statistics
 from UTILITY_plotMod import plotMod, slicePlotMod, floorplanPlot
 from UTILITY_linacPhaseAndAmplitude import getLinacMatchStrings, setLinacPhase, setLinacGradientAuto
 from UTILITY_modifyAndSaveInputBeam import modifyAndSaveInputBeam
-from UTILITY_setLattice import setLattice, getBendkG, getQuadkG, getSextkG, setBendkG, setQuadkG, setSextkG, setXOffset, setYOffset, setKickerkG
+from UTILITY_setLattice import setLattice, getBendkG, getQuadkG, getSextkG, setBendkG, setQuadkG, setSextkG, setXOffset, setYOffset, setKickerkG, getKickerkG
 from UTILITY_impact import runImpact
 from UTILITY_OpenPMDtoBmad import OpenPMD_to_Bmad
 from UTILITY_finalFocusSolver import finalFocusSolver

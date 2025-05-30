@@ -201,32 +201,74 @@ symmetricSextupoleStrengths : True
 
 #2025-04-18-12-44-00 Top island CSR
 #Optimization with fixed phase. N-M of sextupole strengths and movers, starting from 2025-04-18-10-40-25
-L1PhaseSet : -29.5
-L2PhaseSet : -41
-S1ELkG : 45.94277598
-S2ELkG : -2896.7721959126
-S3ELkG : -386.3633298638
-S1EL_xOffset : -0.0000164107
-S1EL_yOffset : -0.0001164661
-S2EL_xOffset : -0.0007221524
-S2EL_yOffset : 0.0000494099
-S2ER_xOffset : 0.0002134529
-S2ER_yOffset : 0.0002790287
-S1ER_xOffset : 0.0000585785
-S1ER_yOffset : 0.0002014729
+# L1PhaseSet : -29.5
+# L2PhaseSet : -41
+# S1ELkG : 45.94277598
+# S2ELkG : -2896.7721959126
+# S3ELkG : -386.3633298638
+# S1EL_xOffset : -0.0000164107
+# S1EL_yOffset : -0.0001164661
+# S2EL_xOffset : -0.0007221524
+# S2EL_yOffset : 0.0000494099
+# S2ER_xOffset : 0.0002134529
+# S2ER_yOffset : 0.0002790287
+# S1ER_xOffset : 0.0000585785
+# S1ER_yOffset : 0.0002014729
 
 # 2025-04-19-07-26-16-INCOMPLETE Top island CSR ON, -29.5/-41.0 +/- 1
-L1PhaseSet : -29.8468028109
-L2PhaseSet : -40.4676460034
-S1ELkG : 209.0684650767
-S2ELkG : -2247.9176927407
-S3ELkG : -1401.8165327565
-S1EL_xOffset : -0.000639576
-S1EL_yOffset : -0.0034613661
-S2EL_xOffset : -0.0033192194
-S2EL_yOffset : -0.0024896306
-S2ER_xOffset : -0.0018343582
-S2ER_yOffset : -0.0012995615
-S1ER_xOffset : 0.000291516
-S1ER_yOffset : -0.0009120653
+# L1PhaseSet : -29.8468028109
+# L2PhaseSet : -40.4676460034
+# S1ELkG : 209.0684650767
+# S2ELkG : -2247.9176927407
+# S3ELkG : -1401.8165327565
+# S1EL_xOffset : -0.000639576
+# S1EL_yOffset : -0.0034613661
+# S2EL_xOffset : -0.0033192194
+# S2EL_yOffset : -0.0024896306
+# S2ER_xOffset : -0.0018343582
+# S2ER_yOffset : -0.0012995615
+# S1ER_xOffset : 0.000291516
+# S1ER_yOffset : -0.0009120653
 #Incomplete optimization. 54 x 16 x 5 um
+
+
+# 2025-05-16-16-19-12 Top island CSR ON, -29.5/-41.0 +/- 1
+# Polish of 2025-04-17-18-39-08
+# L1PhaseSet : -29.8680631511
+# L2PhaseSet : -40.3656177305
+# S1ELkG : 1153.608769778
+# S2ELkG : -3945.4688223922
+# S3ELkG : -1977.759623838
+# S1EL_xOffset : -0.0012480721
+# S1EL_yOffset : -0.001013995
+# S2EL_xOffset : -0.0023744644
+# S2EL_yOffset : 0.0005304335
+# S2ER_xOffset : -0.0003432634
+# S2ER_yOffset : -0.0010105943
+# S1ER_xOffset : 0.0020027113
+# S1ER_yOffset : -0.0022130122
+# 43 x 13 x 4.8 um at PENT
+
+
+
+
+# 2025-05-18-09-02-04 Bottom island CSR ON, -28/-43.5 +/- 1
+# Starting from 2025-04-09-18-04-59
+# L1PhaseSet : -27.2485437132
+# L2PhaseSet : -43.6771191246
+# S1ELkG : 55.5089661748
+# S2ELkG : -2881.6648679101
+# S3ELkG : -1056.1683541543
+# S1EL_xOffset : -0.0000508011
+# S1EL_yOffset : 0.0003895852
+# S2EL_xOffset : -0.0003942418
+# S2EL_yOffset : -0.0000513773
+# S2ER_xOffset : -0.0004504272
+# S2ER_yOffset : -5.6873e-6
+# S1ER_xOffset : 0.0014293515
+# S1ER_yOffset : 0.000673204
+# 33 x 13 x 4.7 um at PENT
+
+
+
+

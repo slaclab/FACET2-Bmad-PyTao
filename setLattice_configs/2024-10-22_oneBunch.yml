@@ -1217,30 +1217,118 @@ L0BEnergyOffset : -2759313 #2024-10-22_oneBunch comes out of L0A just at a tiny 
 # 2025-04-06-07-59-09 One bunch, CSR OFF! <5 um length constraint. Otherwise optimize spot
 # Starting from 2025-04-04-17-12-55
 # Limited optimization 
+# centerBC14 : True
+# centerBC20 : True
+# centerMFFF : True
+# assertBC14Energy : True
+# assertBC20Energy : True
+# symmetricSextupoleStrengths : True
+# L1PhaseSet : -29.8968907035
+# L2PhaseSet : -41.7271714644
+# S1ELkG : 137.7504509524
+# S2ELkG : -921.6058349037
+# S3ELkG : -642.5602190847
+# S1EL_xOffset : 0.0036362126
+# S1EL_yOffset : -0.0006244894
+# S2EL_xOffset : 0.0016381707
+# S2EL_yOffset : 0.0000385292
+# S2ER_xOffset : 0.0011570029
+# S2ER_yOffset : -3.797e-7
+# S1ER_xOffset : 0.0028245459
+# S1ER_yOffset : 0.0002465706
+#PENT: 11 x 7.0 x 4.1 um
+
+
+#2025-05-19-09-51-39 One bunch, CSR off. <10 um length constraint. Otherwise optimize spot
+# centerBC14 : True
+# centerBC20 : True
+# centerMFFF : True
+# assertBC14Energy : True
+# assertBC20Energy : True
+# symmetricSextupoleStrengths : True
+# L1PhaseSet : -29.6308276108
+# L2PhaseSet : -41.2345090037
+# S1ELkG : 781.2359032087
+# S2ELkG : -1774.5098957242
+# S3ELkG : -2581.466979965
+# S1EL_xOffset : 0.0035727461
+# S1EL_yOffset : -0.0002806146
+# S2EL_xOffset : 0.0020263837
+# S2EL_yOffset : -0.0007978187
+# S2ER_xOffset : 0.0007817947
+# S2ER_yOffset : -0.0027626869
+# S1ER_xOffset : 0.0008156412
+# S1ER_yOffset : -0.002242297
+# 12 x 5 x 4.9 um at PENT
+
+
+#2025-05-27-09-45-55 One bunch, CSR on. <10 um length constraint. Otherwise optimize spot
+# centerBC14 : True
+# centerBC20 : True
+# centerMFFF : True
+# assertBC14Energy : True
+# assertBC20Energy : True
+# symmetricSextupoleStrengths : True
+# L1PhaseSet : -29.5132734203
+# L2PhaseSet : -39.2606629896
+# S1ELkG : 863.3855060398
+# S2ELkG : -3246.6411071142
+# S3ELkG : -810.0327077676
+# S1EL_xOffset : 0.001738475
+# S1EL_yOffset : -0.0005423162
+# S2EL_xOffset : -0.0016471792
+# S2EL_yOffset : -0.0004265357
+# S2ER_xOffset : -0.0016533766
+# S2ER_yOffset : 0.0002310425
+# S1ER_xOffset : -0.0015717912
+# S1ER_yOffset : 0.0004185887
+#24 x 7.7 x 9.9 um at PENT
+
+
+
+#2025-05-30-09-40-22 One bunch, CSR off. Minimizing PENT size in quadrature
+#Extensive scan, may be regarded as global optimum: https://docs.google.com/presentation/d/1FfaVf_9RHbaN0NZ-oewsK7TWsEsQt-l1gWrt-4Edlfc/edit?slide=id.g35eda99b2f4_0_10#slide=id.g35eda99b2f4_0_10
+# https://docs.google.com/presentation/d/1FfaVf_9RHbaN0NZ-oewsK7TWsEsQt-l1gWrt-4Edlfc/edit?slide=id.g35d4cc7a4f0_0_0#slide=id.g35d4cc7a4f0_0_0
+# centerBC14 : True
+# centerBC20 : True
+# centerMFFF : True
+# assertBC14Energy : True
+# assertBC20Energy : True
+# symmetricSextupoleStrengths : True
+# L1PhaseSet : -29.702282215
+# L2PhaseSet : -41.0532082418
+# S1ELkG : 4.586510869
+# S2ELkG : -929.5250675858
+# S3ELkG : -223.0277524451
+# S1EL_xOffset : -0.0014467086
+# S1EL_yOffset : 0.002933867
+# S2EL_xOffset : 0.0007707324
+# S2EL_yOffset : 0.0001986822
+# S2ER_xOffset : 0.0004865696
+# S2ER_yOffset : 9.5434e-6
+# S1ER_xOffset : -8.677e-7
+# S1ER_yOffset : 0.0027867941
+# 11 x 8.5 x 7.9 um at PENT
+
+
+#PENDING One bunch, CSR on. Minimizing PENT size in quadrature
+# Starting from 2025-05-30-09-40-22
 centerBC14 : True
 centerBC20 : True
 centerMFFF : True
 assertBC14Energy : True
 assertBC20Energy : True
 symmetricSextupoleStrengths : True
-L1PhaseSet : -29.8968907035
-L2PhaseSet : -41.7271714644
-S1ELkG : 137.7504509524
-S2ELkG : -921.6058349037
-S3ELkG : -642.5602190847
-S1EL_xOffset : 0.0036362126
-S1EL_yOffset : -0.0006244894
-S2EL_xOffset : 0.0016381707
-S2EL_yOffset : 0.0000385292
-S2ER_xOffset : 0.0011570029
-S2ER_yOffset : -3.797e-7
-S1ER_xOffset : 0.0028245459
-S1ER_yOffset : 0.0002465706
-#PENT: 11 x 7.0 x 4.1 um
-
-
-
-
-
-
-
+L1PhaseSet : -29.702282215
+L2PhaseSet : -41.0532082418
+S1ELkG : 4.586510869
+S2ELkG : -929.5250675858
+S3ELkG : -223.0277524451
+S1EL_xOffset : -0.0014467086
+S1EL_yOffset : 0.002933867
+S2EL_xOffset : 0.0007707324
+S2EL_yOffset : 0.0001986822
+S2ER_xOffset : 0.0004865696
+S2ER_yOffset : 9.5434e-6
+S1ER_xOffset : -8.677e-7
+S1ER_yOffset : 0.0027867941

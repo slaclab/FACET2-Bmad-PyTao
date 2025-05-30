@@ -257,7 +257,11 @@ def setKickerkG(tao, kickerName, integratedFieldkG):
     tao.cmd(f"set ele {kickerName} BL_KICK = {integratedFieldkG/10}")
 
     return
-    
+
+def getKickerkG(tao, kickerName):
+    """Return HKICKER or VKICKER EPICS-style integrated field"""
+
+    return tao.ele_gen_attribs(kickerName)["BL_KICK"] * 10 
 
 def setAllInjectorQuads(tao, QA10361kG, QA10371kG, QE10425kG, QE10441kG, QE10511kG, QE10525kG):
     setQuadkG(tao, "QA10361", QA10361kG)
