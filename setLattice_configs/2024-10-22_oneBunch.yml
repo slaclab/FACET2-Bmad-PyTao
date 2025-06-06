@@ -1311,7 +1311,8 @@ L0BEnergyOffset : -2759313 #2024-10-22_oneBunch comes out of L0A just at a tiny 
 # 11 x 8.5 x 7.9 um at PENT
 
 
-#PENDING One bunch, CSR on. Minimizing PENT size in quadrature
+#2024-10-22_oneBunch_baseline3.yml
+#2025-06-04-13-06-30 One bunch, CSR on. Minimizing PENT size in quadrature
 # Starting from 2025-05-30-09-40-22
 centerBC14 : True
 centerBC20 : True
@@ -1319,16 +1320,21 @@ centerMFFF : True
 assertBC14Energy : True
 assertBC20Energy : True
 symmetricSextupoleStrengths : True
-L1PhaseSet : -29.702282215
-L2PhaseSet : -41.0532082418
-S1ELkG : 4.586510869
-S2ELkG : -929.5250675858
-S3ELkG : -223.0277524451
-S1EL_xOffset : -0.0014467086
-S1EL_yOffset : 0.002933867
-S2EL_xOffset : 0.0007707324
-S2EL_yOffset : 0.0001986822
-S2ER_xOffset : 0.0004865696
-S2ER_yOffset : 9.5434e-6
-S1ER_xOffset : -8.677e-7
-S1ER_yOffset : 0.0027867941
+L1PhaseSet : -28.9100908383
+L2PhaseSet : -39.0717691285
+S1ELkG : 9.5354261372
+S2ELkG : -998.8857534325
+S3ELkG : -312.4574420756
+S1EL_xOffset : -0.0024831962
+S1EL_yOffset : 0.0024286168
+S2EL_xOffset : 0.0003279967
+S2EL_yOffset : -0.0001951917
+S2ER_xOffset : 0.0025878477
+S2ER_yOffset : -0.0000264729
+S1ER_xOffset : 0.0021476773
+S1ER_yOffset : -0.0003583632
+# 19 x 8 x 14 um at PENT
+
+
+#PENDING One bunch, CSR off. Minimizing PENT size in quadrature; sizes are Gaussian fits not SI90!
+
