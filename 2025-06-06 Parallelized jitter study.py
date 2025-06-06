@@ -54,18 +54,20 @@ def jitterLinac(
     ######################################################
     #Apply same errors to all elements in the linac region
     ######################################################
+
+    clipLimit = 0.1
     
     #Convert to "turns"
-    L0BPhaseError = np.random.normal() * L0BPhaseErrorDeg / 360.0 
-    L1PhaseError  = np.random.normal() * L1PhaseErrorDeg  / 360.0 
-    L2PhaseError  = np.random.normal() * L2PhaseErrorDeg  / 360.0 
-    L3PhaseError  = np.random.normal() * L3PhaseErrorDeg  / 360.0
+    L0BPhaseError = np.clip( np.random.normal(), a_min = -1*clipLimit, a_max = clipLimit) * L0BPhaseErrorDeg / 360.0 
+    L1PhaseError  = np.clip( np.random.normal(), a_min = -1*clipLimit, a_max = clipLimit) * L1PhaseErrorDeg  / 360.0 
+    L2PhaseError  = np.clip( np.random.normal(), a_min = -1*clipLimit, a_max = clipLimit) * L2PhaseErrorDeg  / 360.0 
+    L3PhaseError  = np.clip( np.random.normal(), a_min = -1*clipLimit, a_max = clipLimit) * L3PhaseErrorDeg  / 360.0
 
     #Give as multiplier to base gradient
-    L0BGradientErrorRelative = np.random.normal() * L0BGradientErrorPercent / 100.0
-    L1GradientErrorRelative  = np.random.normal() * L1GradientErrorPercent  / 100.0
-    L2GradientErrorRelative  = np.random.normal() * L2GradientErrorPercent  / 100.0
-    L3GradientErrorRelative  = np.random.normal() * L3GradientErrorPercent  / 100.0
+    L0BGradientErrorRelative = np.clip( np.random.normal(), a_min = -1*clipLimit, a_max = clipLimit) * L0BGradientErrorPercent / 100.0
+    L1GradientErrorRelative  = np.clip( np.random.normal(), a_min = -1*clipLimit, a_max = clipLimit) * L1GradientErrorPercent  / 100.0
+    L2GradientErrorRelative  = np.clip( np.random.normal(), a_min = -1*clipLimit, a_max = clipLimit) * L2GradientErrorPercent  / 100.0
+    L3GradientErrorRelative  = np.clip( np.random.normal(), a_min = -1*clipLimit, a_max = clipLimit) * L3GradientErrorPercent  / 100.0
     
     #Prevent recalculation until changes are made
     tao.cmd("set global lattice_calc_on = F")    
@@ -182,7 +184,7 @@ def hashDict(d):
 def worker(overrides):
     importedDefaultSettings = loadConfig("setLattice_configs/2024-10-14_twoBunch_baseline.yml")
     
-    csrTF = False
+    csrTF = True
 
     tao = initializeTao(
         inputBeamFilePathSuffix = importedDefaultSettings["inputBeamFilePathSuffix"],
@@ -225,6 +227,15 @@ def worker(overrides):
     )
     print(jitterDict)
     hashStr = hashDict(jitterDict)
+
+
+    # OPTIONAL: disable all apertures. Very nonphysical, but I want to see if this solves some headaches
+    totalNumElements = len(tao.lat_list("*", "ele.name"))
+    for eleII in range(totalNumElements):
+        try:
+            tao.cmd(f"set ele {eleII} APERTURE_AT = NO_APERTURE")
+        except:
+            pass
 
     
 
