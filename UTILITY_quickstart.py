@@ -1205,3 +1205,22 @@ def disableAutoMagnetEnergyCompensation(tao):
     tao.cmd("set ele HKicker::* FIELD_MASTER = T")
 
     return
+
+def applyOtherConfig(tao, configArr):
+    """
+    The format for other_configs is an array with rows
+    [ elementName, attributeName, setValue ] 
+    """
+    
+    #Prevent recalculation until changes are made
+    tao.cmd("set global lattice_calc_on = F")
+
+    try: 
+        for row in configArr:
+            tao.cmd(f"""set ele {row[0]} {row[1]} = {row[2]}""")
+
+    except:
+        print("WARNING! At least one assignment has failed!")
+
+    #Prevent recalculation until changes are made
+    tao.cmd("set global lattice_calc_on = T")

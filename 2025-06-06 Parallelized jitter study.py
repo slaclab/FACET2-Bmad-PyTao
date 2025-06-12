@@ -55,7 +55,7 @@ def jitterLinac(
     #Apply same errors to all elements in the linac region
     ######################################################
 
-    clipLimit = 0.1
+    clipLimit = 10
     
     #Convert to "turns"
     L0BPhaseError = np.clip( np.random.normal(), a_min = -1*clipLimit, a_max = clipLimit) * L0BPhaseErrorDeg / 360.0 
@@ -184,7 +184,7 @@ def hashDict(d):
 def worker(overrides):
     importedDefaultSettings = loadConfig("setLattice_configs/2024-10-14_twoBunch_baseline.yml")
     
-    csrTF = True
+    csrTF = False
 
     tao = initializeTao(
         inputBeamFilePathSuffix = importedDefaultSettings["inputBeamFilePathSuffix"],
@@ -227,6 +227,8 @@ def worker(overrides):
     )
     print(jitterDict)
     hashStr = hashDict(jitterDict)
+
+    jitterDict = {"csrTF":csrTF} | jitterDict
 
 
     # OPTIONAL: disable all apertures. Very nonphysical, but I want to see if this solves some headaches
@@ -293,7 +295,7 @@ if __name__ == "__main__":
     #     for L1 in np.arange(-21, -16, 1)
     # ]
 
-    tasks = range(10)
+    tasks = range(90)
 
     with multiprocessing.Pool(num_workers) as pool:
         results = pool.map(worker, tasks)
