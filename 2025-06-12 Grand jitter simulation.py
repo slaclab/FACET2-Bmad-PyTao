@@ -135,14 +135,16 @@ def hashDict(d):
 def worker(config):
 
 
-    csrTF = False
+    csrTF = True
     transverseWakes = False
 
     
     if config["startingPoint"] == "TwoBunch":
         importedDefaultSettings = loadConfig("setLattice_configs/2024-10-14_twoBunch_baseline.yml")
-    elif config["startingPoint"] == "OneBunch":
+    elif config["startingPoint"] == "OneBunchA":
         importedDefaultSettings = loadConfig("setLattice_configs/2024-10-22_oneBunch_baseline3.yml")
+    elif config["startingPoint"] == "OneBunchB":
+        importedDefaultSettings = loadConfig("setLattice_configs/2024-10-22_oneBunch_baseline2.yml")
     else:
         print("Illegal starting point")
         return
@@ -235,18 +237,65 @@ def worker(config):
 
 
     #Apply misalignments
-    if config["alignment"] == "PinkCurveSteered" or config["alignment"] == "PinkCurveUnsteered":
+    if config["alignment"] == "PinkCurveSteered":
         with open('./other_configs/pinkCurveMisalignments.json', 'r') as f:
-            misalignmentConfig = json.load(f)
-        
+            misalignmentConfig = json.load(f)       
         applyOtherConfig(tao, misalignmentConfig) 
 
-        if config["alignment"] == "PinkCurveSteered":
+        if config["startingPoint"] == "TwoBunch":
+            with open('./other_configs/2025-06-13_pinkCurveSteering_2024-10-14_twoBunch_baseline_extended.json', 'r') as f:
+                steeringConfig = json.load(f)
+            applyOtherConfig(tao, steeringConfig) 
+        
+        elif config["startingPoint"] == "OneBunchA" or config["startingPoint"] == "OneBunchB": 
             with open('./other_configs/2025-06-12_pinkCurveSteering.json', 'r') as f:
                 steeringConfig = json.load(f)
-            
             applyOtherConfig(tao, steeringConfig) 
 
+        else:
+            print("Problem when steering?")
+            return
+
+    elif config["alignment"] == "BlueCurveSteered":
+        with open('./other_configs/blueCurveMisalignments.json', 'r') as f:
+            misalignmentConfig = json.load(f)       
+        applyOtherConfig(tao, misalignmentConfig) 
+
+        if config["startingPoint"] == "TwoBunch":
+            with open('./other_configs/2025-06-13_blueCurveSteering_2024-10-14_twoBunch_baseline_extended.json', 'r') as f:
+                steeringConfig = json.load(f)
+            applyOtherConfig(tao, steeringConfig) 
+        
+        elif config["startingPoint"] == "OneBunchA" or config["startingPoint"] == "OneBunchB": 
+            with open('./other_configs/2025-06-12_blueCurveSteering.json', 'r') as f:
+                steeringConfig = json.load(f)
+            applyOtherConfig(tao, steeringConfig) 
+            
+        else:
+            print("Problem when steering?")
+            return
+            
+    elif config["alignment"] == "Winter2025BBASteered":
+        with open('./other_configs/winter2025BBAMisalignments.json', 'r') as f:
+            misalignmentConfig = json.load(f)       
+        applyOtherConfig(tao, misalignmentConfig) 
+
+        if config["startingPoint"] == "TwoBunch":
+            with open('./other_configs/2025-06-13_winter2025BBASteering_2024-10-14_twoBunch_baseline_extended.json', 'r') as f:
+                steeringConfig = json.load(f)
+            applyOtherConfig(tao, steeringConfig) 
+        
+        elif config["startingPoint"] == "OneBunchA" or config["startingPoint"] == "OneBunchB": 
+            with open('./other_configs/2025-06-12_winter2025BBASteering.json', 'r') as f:
+                steeringConfig = json.load(f)
+            applyOtherConfig(tao, steeringConfig) 
+        
+        else:
+            print("Problem when steering?")
+            return
+
+
+    
     elif config["alignment"] == "Aligned":
         pass
 
@@ -292,14 +341,14 @@ def worker(config):
     
 
 if __name__ == "__main__":
-    num_workers = 4 #8
+    num_workers = 8 #8
 
 
     tasks = [
         {"startingPoint": startingPoint, "alignment": alignment, "jitterParameters": jitterParameters}
-        for ii in range(5)
-        for startingPoint in {"OneBunch", "TwoBunch"}
-        for alignment in {"Aligned", "PinkCurveSteered", "PinkCurveUnsteered"}
+        for ii in range(100)
+        for startingPoint in ["TwoBunch", "OneBunchA", "OneBunchB"]
+        for alignment in {"Aligned", "PinkCurveSteered", "BlueCurveSteered", "Winter2025BBASteered"}
         for jitterParameters in {"ChunkJitter", "KlystronJitter"}
     ]
 
