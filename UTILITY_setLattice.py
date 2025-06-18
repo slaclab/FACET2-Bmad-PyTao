@@ -26,14 +26,6 @@ def setLattice(
 
     #Prevent recalculation until changes are made
     tao.cmd("set global lattice_calc_on = F")
-
-    #Pre-2024-09-30 version, can delete
-    # setLinacsHelper(tao, 
-    #                 latticeSettings["L1PhaseSet"], 
-    #                 latticeSettings["L2PhaseSet"], 
-    #                 latticeSettings["L2EnergyOffset"], 
-    #                 latticeSettings["L3EnergyOffset"]
-    #                )
     
     setLinacsHelper(
         tao,
@@ -46,6 +38,12 @@ def setLattice(
         latticeSettings["L3PhaseSet"], 
         latticeSettings["L3EnergyOffset"]
     )
+
+
+    #Reenable lattice calculations to let Bmad auto-update magnets for new energy. Then immediately disable again
+    tao.cmd("set global lattice_calc_on = T")
+
+    tao.cmd("set global lattice_calc_on = F")
 
     setAllInjectorQuads(tao, 
                         latticeSettings["QA10361kG"], 
@@ -155,24 +153,6 @@ def setLinacsHelper(tao, L0BPhaseSet, L0BEnergyOffset, L1PhaseSet, L1EnergyOffse
     setLinacPhase(        tao, L3MatchStrings, L3PhaseSet )
     setLinacGradientAuto( tao, L3MatchStrings, L3EnergyOffset + 10.0e9 - 4.5e9 )
 
-def setLinacsHelperLEGACY(tao, L1PhaseSet, L2PhaseSet, L2EnergyOffset, L3EnergyOffset):
-    """Pre 2024-09-30 version. Can be deleted"""
-    [L1MatchStrings, L2MatchStrings, L3MatchStrings, selectMarkers] = getLinacMatchStrings(tao)
-    
-    # === Make changes to base lattice ===
-    tao.cmd('set ele L0BF PHI0 = 0') #DNT. "loadNominalValues_2Bunch.m" had this set to zero
-    tao.cmd('set ele L0BF VOLTAGE = 5.95e7') #DNT. Base value was 7.1067641E+07, new value set to change output energy to 125 MeV (down from 136.5 MeV)
-    
-    #L1AssertPHI0 = -19 #DNT. "loadNominalValues_2Bunch.m" had this set to -19 degrees
-    setLinacPhase(        tao, L1MatchStrings, L1PhaseSet ) 
-    setLinacGradientAuto( tao, L1MatchStrings, 0.335e9 - 0.125e9 ) 
-    
-    #L2AssertPHI0 = -37 #DNT. "loadNominalValues_2Bunch.m" had this set to -37 degrees
-    setLinacPhase(        tao, L2MatchStrings, L2PhaseSet ) 
-    setLinacGradientAuto( tao, L2MatchStrings, L2EnergyOffset + 4.5e9 - 0.335e9 )
-    
-    setLinacPhase(        tao, L3MatchStrings, 0 )
-    setLinacGradientAuto( tao, L3MatchStrings, L3EnergyOffset + 10.0e9 - 4.5e9 )
 
 def setBendkG(tao, bendName, integratedFieldkG):
     """Set bend based on EPICS-style integrated field. This involves a sign flip!"""
