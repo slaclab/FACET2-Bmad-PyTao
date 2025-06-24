@@ -129,6 +129,9 @@ def setLattice(
                         latticeSettings["YC1FFkG"],
                         latticeSettings["YC2FFkG"]
                         )
+
+    setBendGeVc(tao, "B5D36", latticeSettings["B5D36GeVc"])
+    
     
     #Reenable lattice calculations
     tao.cmd("set global lattice_calc_on = T")
@@ -242,6 +245,43 @@ def getKickerkG(tao, kickerName):
     """Return HKICKER or VKICKER EPICS-style integrated field"""
 
     return tao.ele_gen_attribs(kickerName)["BL_KICK"] * 10 
+
+
+def setBendGeVc(tao, bendName, desiredBendGeVc):
+    """
+    Specify a bend's strength using "GeV/c" the way the control system does
+    Presently, this only works on special cases where this conversion is specified
+    """
+
+    #Final spectrometer dipole, B5D36, is designed to give R46 = 6 mrad at 10 GeV (consistent with golden lattice) 
+    #It achieves this at G = 6.1355967E-03 1/m
+    if bendName == "B5D36":
+        designEnergyGeVc = 10
+        designG = 6.1355967E-03
+        tao.cmd(f"set ele {bendName} G = { designG * desiredBendGeVc / designEnergyGeVc}")
+
+    else:
+        "Not a special case bend"
+        return
+
+def getBendGeVc(tao, bendName):
+    """
+    Based on the bend's setting and the design lattice, report the setting in "GeV/c" the way the control system does
+    Presently, this only works on special cases where this conversion is specified
+    """
+
+    #Final spectrometer dipole, B5D36, is designed to give R46 = 6 mrad at 10 GeV (consistent with golden lattice) 
+    #It achieves this at G = 6.1355967E-03 1/m
+    if bendName == "B5D36":
+        designEnergyGeVc = 10
+        designG = 6.1355967E-03
+        return tao.ele_gen_attribs(bendName)["G"] * designEnergyGeVc  / designG
+
+    else:
+        "Not a special case bend"
+        return
+    
+
 
 def setAllInjectorQuads(tao, QA10361kG, QA10371kG, QE10425kG, QE10441kG, QE10511kG, QE10525kG):
     setQuadkG(tao, "QA10361", QA10361kG)
