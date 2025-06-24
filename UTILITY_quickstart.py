@@ -76,6 +76,8 @@ def initializeTao(
         tao=Tao('-init {:s}/bmad/models/f2_elec/tao_transverseWakesOn.init -noplot'.format(environ['FACET2_LATTICE'])) 
     else:
         tao=Tao('-init {:s}/bmad/models/f2_elec/tao.init -noplot'.format(environ['FACET2_LATTICE'])) 
+
+    tao.filePathGlobal = filePathGlobal #Put this into the tao object immediately. Needed early in the initialization
     
     tao.cmd("set beam add_saved_at = DTOTR, XTCAVF, M2EX, PR10571, PR10711, CN2069, YCWIGE") #The beam is saved at all MARKER elements already; this list just supplements
 
@@ -638,7 +640,7 @@ def setLatticeAndGetMatrix(tao, start, end, startOffset = 0, endOffset = 0, defa
     """
     
     if not defaultSettings:
-        defaultSettings = loadConfig("setLattice_configs/defaults.yml")
+        defaultSettings = loadConfig(f"{tao.filePathGlobal}/setLattice_configs/defaults.yml")
         
     setLattice(tao, **( defaultSettings | overrideSettings ) )
    

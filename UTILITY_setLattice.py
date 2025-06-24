@@ -13,7 +13,7 @@ def setLattice(
 ):
 
     if not defaultsFile:
-        defaultsFile = 'setLattice_configs/defaults.yml'
+        defaultsFile = f'{tao.filePathGlobal}/setLattice_configs/defaults.yml'
         if verbose:
             print(f"No defaults file provided to setLattice(). Using {defaultsFile}")
         
