@@ -40,9 +40,9 @@ def setLattice(
     )
 
 
-    #Reenable lattice calculations to let Bmad auto-update magnets for new energy. Then immediately disable again
+    #2025-06-18 update: Reenable lattice calculations to let Bmad auto-update magnets for new energy. Then immediately disable again
+    #This prevents an ambigious condition where Bmad may overwrite the setLattice() magnet values
     tao.cmd("set global lattice_calc_on = T")
-
     tao.cmd("set global lattice_calc_on = F")
 
     setAllInjectorQuads(tao, 

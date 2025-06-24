@@ -23,7 +23,7 @@ include:
 
 
 #inputBeamFilePathSuffix : '/beams/2025-05-14_twobunch_unoptimized_shorterSpacing/2025-05-14_twobunch_unoptimized_shorterSpacing.h5'
-#inputBeamFilePathSuffix : '/beams/2025-05-13_twobunch_unoptimized_shortSpacing/2025-05-13_twobunch_unoptimized_shortSpacing.h5'
+#inputBeamFilePathSuffix : '/beams/2025-05-13_twobunch_unoptimized_shortSpacing/2025-05-13_twobunch_unoptimized_shortSpacing.h5' #2025-06-21-08-58-49 I'm pretty pessimistic about this. Pretty large parameter scans don't give encouraging results
 inputBeamFilePathSuffix : '/beams/2024-10-14_Impact_TwoBunch/2024-10-14_TwoBunch.h5'
 
 
@@ -128,7 +128,7 @@ centerBC20 : True
 centerMFFF : True
 assertBC14Energy : 4.5e+9
 assertBC20Energy : 6.0e+9
-symmetricSextupoleStrengths : True
+symmetricSextupoleStrengths : False
 
 
 # L1PhaseSet : -32.7342594561
@@ -154,3 +154,147 @@ L2PhaseSet : -40
 # S1ELkG : 480.5795294461
 # S2ELkG : -1625.5206286223
 # S3ELkG : -2.4518404236
+
+
+
+# L1PhaseSet : -25.9195405027
+# L2PhaseSet : -44.8600422018
+# L3PhaseSet : -2.0588751421
+# B1EkG : 4.525555844
+# B2EkG : -6.5609006647
+# B3EkG : 2.0463688843
+# Q1EkG : 99.6146437891
+# Q2EkG : -91.6431654717
+# Q3EkG : 65.78179991
+# Q4EkG : 77.6041624244
+# Q5EkG : -6.9381390934
+# Q6EkG : -89.3767936919
+# S1ELkG : 1019.1350695007
+# S2ELkG : -2192.0520837087
+# S3ELkG : -768.3975718376
+# S3ERkG : -597.4699244334
+# S2ERkG : -1583.8827369541
+# S1ERkG : 442.6255578752
+# S1EL_xOffset : -0.0002210808
+# S1EL_yOffset : -0.0001779802
+# S2EL_xOffset : 0.0001777181
+# S2EL_yOffset : -0.0000941324
+# S2ER_xOffset : 0.0008566029
+# S2ER_yOffset : -0.0008701895
+# S1ER_xOffset : 0.0013358444
+# S1ER_yOffset : -0.0007047907
+
+# L1PhaseSet : -22
+# L2PhaseSet : -40
+# Q1EkG : 100.609276622
+# Q2EkG : -94.9352359441
+# Q3EkG : 82.6695093709
+# Q4EkG : 47.3890608058
+# Q5EkG : -36.3196500584
+# Q6EkG : -44.5080211444
+# S1ELkG : 2329.3575567228
+# S2ELkG : -11057.9040420116
+# S3ELkG : -496.3369025612
+# S3ERkG : -2297.1605194601
+# S2ERkG : -20471.344165027
+# S1ERkG : 2299.6817556054
+
+
+#2025-06-23-10-13-26 Analytic R56 = -14 mm. With these L1/L2 phases, gives 40 um spacing, albeit with charge loss
+# L1PhaseSet : -22
+# L2PhaseSet : -40
+# Q1EkG : 97.1596722
+# Q2EkG : -105.37180621
+# Q3EkG : 65.50817387
+# Q4EkG : 80.11655116
+# Q5EkG : -5.68225198
+# Q6EkG : -96.78779666
+
+
+
+# Q19851kG : -33.7719887064
+# Q19871kG : 34.7720974328
+# Q1EkG : 96.5032099722
+# Q2EkG : -93.136549827
+# Q3EkG : 64.1392508488
+# Q4EkG : 67.7855360933
+# Q5EkG : -0.2648674525
+# Q6EkG : -0.078349615
+
+
+
+
+########
+# Going to try to sneak up on it. Starting from target spacing of 200 um
+# For now, alignment terms are off. Only allowing phases, sextupole strengths, BC20 quads and launch quads
+# These are all with the nominal PSDL, "2024-10-14_TwoBunch.h5'"
+########
+
+
+
+# 2025-06-23-15-50-12 150+/-50 um spacing
+# L1PhaseSet : -32.4823816888
+# L2PhaseSet : -39.0845984107
+# L3PhaseSet : -0.8437397245
+# Q19851kG : -38.2903253809
+# Q19871kG : 25.8661173006
+# Q1EkG : 92.3878572277
+# Q2EkG : -91.3014107286
+# Q3EkG : 65.0608804785
+# Q4EkG : 81.8184288858
+# Q5EkG : -14.6631994105
+# Q6EkG : -84.5171275352
+# S1ELkG : 433.9585282203
+# S2ELkG : -1264.0113774695
+# S3ELkG : -622.6940849048
+# S3ERkG : -592.9964191619
+# S2ERkG : -1213.5690421113
+# S1ERkG : 486.0497385586
+
+# 100+/-20 um spacing
+# L1PhaseSet : -33.3018452064
+# L2PhaseSet : -39.5239701776
+# L3PhaseSet : 0.2044782091
+# Q19851kG : -37.1865604814
+# Q19871kG : 26.6077538917
+# Q1EkG : 94.4727446706
+# Q2EkG : -96.4559879612
+# Q3EkG : 64.3705340378
+# Q4EkG : 87.347083941
+# Q5EkG : -14.4480445572
+# Q6EkG : -90.6728845396
+# S1ELkG : 422.3417893915
+# S2ELkG : -1438.0813116231
+# S3ELkG : -559.5080009209
+# S3ERkG : -625.1656252056
+# S2ERkG : -1321.5246507941
+# S1ERkG : 564.0967746952
+
+# 50+/-20 um spacing
+
+
+
+########
+# Didn't give the above a sufficient try. But wrote an optimizer variant that updates target spacing adiabatically 
+########
+L1PhaseSet : -32.4823816888
+L2PhaseSet : -39.0845984107
+
+#2025-06-24-07-13-18 Possibly successful 60 um spacing... not carefully investigated though
+L1PhaseSet : -33.3531445013
+L2PhaseSet : -39.9971627494
+L3PhaseSet : 36.5571488597
+Q19851kG : -35.0383873112
+Q19871kG : 30.7143110129
+Q1EkG : 79.4649139966
+Q2EkG : -92.6489175227
+Q3EkG : 65.3786425107
+Q4EkG : 84.4910551114
+Q5EkG : -21.3891912197
+Q6EkG : -77.5875927838
+S1ELkG : 635.8574170183
+S2ELkG : -1798.3655963564
+S3ELkG : -1683.4458022513
+S3ERkG : -777.6838500757
+S2ERkG : -2576.1128498432
+S1ERkG : 157.0764996136
