@@ -77,7 +77,7 @@ XC3FFkG: 0.0
 YC1FFkG: 0.0
 YC2FFkG: 0.0
 
-#Final spectrometer dipole. 10 GeV/c = 2.001384568576479 kg-m
+#Final spectrometer dipole. "10 GeV/c" = 2.001384568576479 kg-m
 B5D36GeVc : 10.0
 
 
