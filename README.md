@@ -1,6 +1,6 @@
 # FACET-II (start-to-end) S2E Simulation Toolkit
 
-This repository contains utilities, Jupyter notebooks, and configuration files used to perform start-to-end (S2E) simulations of the [FACET-II](https://facet-ii.slac.stanford.edu/) particle accelerator beamline, a US Department of Energy National National User Facility which hosts hundreds of users a year.  The core workflow uses [IMPACT-T](https://github.com/impact-lbl/IMPACT-T) for beam generation and low energy transport, [Bmad, Tao, and PyTao](https://www.classe.cornell.edu/bmad/) for most of the beam transport through the kilometer-long linear accelerator, and, optionally, [QPAD](https://picksc.physics.ucla.edu/qpad.html) for particle-in-cell simulations of the beam in plasma, and [openPMD-beamphysics](https://github.com/ChristopherMayes/openPMD-beamphysics) for handling beam files. It is intended to abstract away unnecessary detail so facility users can quickly and easily run the most common types of simulations including parameter scans, constrained optimization of both Twiss and multi-particle tracking objectives, and jitter sensitivity analysis.
+This repository contains utilities, Jupyter notebooks, and configuration files used to perform start-to-end (S2E) simulations of the [FACET-II](https://facet-ii.slac.stanford.edu/) particle accelerator beamline, a US Department of Energy National National User Facility which hosts hundreds of users a year.  The core workflow uses [IMPACT-T](https://github.com/impact-lbl/IMPACT-T) for beam generation and low energy transport, [Bmad, Tao, and PyTao](https://www.classe.cornell.edu/bmad/) for most of the beam transport through the kilometer-long linear accelerator, and, optionally, [QPAD](https://picksc.physics.ucla.edu/qpad.html) for particle-in-cell simulations of the beam in plasma, and [openPMD-beamphysics](https://github.com/ChristopherMayes/openPMD-beamphysics) for handling beam files. It is intended to abstract away unnecessary detail so facility users can quickly and easily run the most common types of simulations including parameter scans, constrained optimization of both Twiss and multiparticle tracking objectives, and jitter sensitivity analysis.
 
 
 ## Installation
@@ -29,8 +29,14 @@ This repository contains utilities, Jupyter notebooks, and configuration files u
 
 The notebooks in the repository demonstrate typical workflows:
 
-* **`S3DF demo notebook.ipynb`** – runs a short Bmad simulation with a reference lattice and beam file.  It also introduces the helper functions for adjusting magnet and linac settings.
-* **`S3DF demo notebook - with IMPACT.ipynb`** – performs a full S2E run that generates the input beam with IMPACT‑T before tracking it through the lattice.
+* **`Example - Basic introduction.ipynb`** – runs a short Bmad simulation with a reference lattice and beam file.  It also introduces some basic functionality like reading and setting magnets using control system units, phasing linacs, etc.
+* **`Example - IMPACT-T beam generation.ipynb`** – performs a full S2E run that generates the input beam with IMPACT‑T before tracking it through the lattice.
+* **`Example - Final focus tuning.ipynb`** – demonstrates the final focus optics optimizer to pick magnet settings to achieve desired Twiss
+* **`Example - Multiparticle racking optimization.ipynb`** – demonstrates optimization constrained by real-world hardware limits of a multiparticle tracked beam
+* **`Example - Solution postprocessing and analysis.ipynb`** – postprocessing and analysis of both the beam throughout the lattice
+* **`Example - Beam visualization.nb`** – Mathematica notebook for advanced beam visualization and analysis, including 3D animation generation
+* **`Example - Optimization progress dashboard.nb`** – Mathematica companion notebook which visualizes optimization progress, e.g. parameter sensitivities and convergence
+* **`Example - Jitter study.py`** – Parallel computation of many simulations with parameters subject to jitter, informed by real-world measurements
 
 Launch Jupyter, open one of these notebooks and run all cells to verify the installation.
 
