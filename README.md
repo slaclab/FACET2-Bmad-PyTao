@@ -1,10 +1,10 @@
-# FACET-II S2E Simulation Toolkit
+# FACET-II (start-to-end) S2E Simulation Toolkit
 
-This repository contains utilities, Jupyter notebooks and configuration files used to perform start-to-end (S2E) simulations of the FACET-II electron beam line.  The workflow relies on the [Bmad](https://www.classe.cornell.edu/bmad/) accelerator physics library together with [IMPACT-T](https://github.com/ChristopherMayes/impact) for initial beam generation.
+This repository contains utilities, Jupyter notebooks, and configuration files used to perform start-to-end (S2E) simulations of the [FACET-II](https://facet-ii.slac.stanford.edu/) beamline, a US Department of Energy National National User Facility.  The core workflow uses [IMPACT-T](https://github.com/impact-lbl/IMPACT-T) for beam generation and low energy transport, [Bmad and PyTao](https://www.classe.cornell.edu/bmad/) for most of the beam transport, and, optionally, [QPAD](https://picksc.physics.ucla.edu/qpad.html) for particle-in-cell simulations of the beam in plasma. It is intended to absract away unecessary detail so facility users can easily run the most common types of simulations including parameter scans, constrained optimization, and jitter sensitivity analysis.
 
-The project grew out of a collection of notebooks and helper scripts.  Everything needed to launch a simulation, modify lattice settings and analyse the beam is included here.
 
 ## Installation
+
 
 1. **Clone with Git LFS**
    ```bash
@@ -25,7 +25,7 @@ The project grew out of a collection of notebooks and helper scripts.  Everythin
    conda install -c conda-forge bmad pytao openpmd-beamphysics distgen lume-base lume-impact bayesian-optimization
    ```
 
-## Quick start
+## Examples
 
 The notebooks in the repository demonstrate typical workflows:
 
@@ -37,19 +37,16 @@ Launch Jupyter, open one of these notebooks and run all cells to verify the inst
 ## Repository layout
 
 ```
-ARCHIVE/                 Older studies and experimental notebooks
-beams/                   Example beams and scripts to generate them
-bmad/                    FACET-II lattice descriptions and conversion tools
-impact/                  Supplementary IMPACT‑T configuration files
-other_configs/           Steering and misalignment configuration JSON files
-setLattice_configs/      Default magnet settings in YAML format
-UTILITY_*.py             Helper modules used by the notebooks
+ARCHIVE/                 Historical studies, optimizations, and experimental notebooks
+beams/                   Reference beams and scripts to generate them
+bmad/                    Bmad ['golden lattice'](https://github.com/slaclab/facet2-lattice)
+impact/                  IMPACT‑T configuration files
+other_configs/           Atypical configurations including misalignment and steering solutions
+setLattice_configs/      Reference lattices
+UTILITY_*.py             Helper functions
 bmadCondaEnv.yml         Conda environment specification
 ```
 
-*The `beams/2024-07-01_Impact_TwoBunch` directory contains a small README describing how one of the reference beams was produced with IMPACT‑T.*
-
-The `bmad/conversion` folder documents how to regenerate the Bmad lattice from SLAC MAD optics files.  See `bmad/conversion/README.md` for the full procedure.
 
 ## Helper utilities
 
@@ -74,8 +71,4 @@ If you cannot use LFS, manually download the `.h5` beam files from another sourc
 
 ## Further documentation
 
-Most development work happens inside the notebooks.  The notebooks in the `ARCHIVE` folder track previous investigations and may serve as additional examples.  Feel free to explore them once the environment is working.
-
-## Support
-
-This repository is provided as-is without an official support channel.  The notebooks should serve as both documentation and working examples for running FACET-II S2E simulations.
+Most development work happens inside the notebooks.  The notebooks in the `ARCHIVE` folder track previous investigations and may serve as additional example.
