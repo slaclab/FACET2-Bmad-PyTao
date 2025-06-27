@@ -1,6 +1,6 @@
 # FACET-II (start-to-end) S2E Simulation Toolkit
 
-This repository contains utilities, Jupyter notebooks, and configuration files used to perform start-to-end (S2E) simulations of the [FACET-II](https://facet-ii.slac.stanford.edu/) particle accelerator beamline, a US Department of Energy National National User Facility.  The core workflow uses [IMPACT-T](https://github.com/impact-lbl/IMPACT-T) for beam generation and low energy transport, [Bmad, Tao, and PyTao](https://www.classe.cornell.edu/bmad/) for most of the beam transport through the kilometer-long linear accelerator, and, optionally, [QPAD](https://picksc.physics.ucla.edu/qpad.html) for particle-in-cell simulations of the beam in plasma, and [openPMD-beamphysics](https://github.com/ChristopherMayes/openPMD-beamphysics) for handling beam files. It is intended to abstract away unecessary detail so facility users can quickly and easily run the most common types of simulations including parameter scans, constrained optimization, and jitter sensitivity analysis.
+This repository contains utilities, Jupyter notebooks, and configuration files used to perform start-to-end (S2E) simulations of the [FACET-II](https://facet-ii.slac.stanford.edu/) particle accelerator beamline, a US Department of Energy National National User Facility which hosts hundreds of users a year.  The core workflow uses [IMPACT-T](https://github.com/impact-lbl/IMPACT-T) for beam generation and low energy transport, [Bmad, Tao, and PyTao](https://www.classe.cornell.edu/bmad/) for most of the beam transport through the kilometer-long linear accelerator, and, optionally, [QPAD](https://picksc.physics.ucla.edu/qpad.html) for particle-in-cell simulations of the beam in plasma, and [openPMD-beamphysics](https://github.com/ChristopherMayes/openPMD-beamphysics) for handling beam files. It is intended to abstract away unnecessary detail so facility users can quickly and easily run the most common types of simulations including parameter scans, constrained optimization of both Twiss and multi-particle tracking objectives, and jitter sensitivity analysis.
 
 
 ## Installation
@@ -39,7 +39,7 @@ Launch Jupyter, open one of these notebooks and run all cells to verify the inst
 ```
 ARCHIVE/                 Historical studies, optimizations, and experimental notebooks
 beams/                   Reference beams and scripts to generate them
-bmad/                    Bmad ['golden lattice'](https://github.com/slaclab/facet2-lattice)
+bmad/                    Bmad 'golden lattice' (https://github.com/slaclab/facet2-lattice)
 impact/                  IMPACT‑T configuration files
 other_configs/           Atypical configurations including misalignment and steering solutions
 setLattice_configs/      Reference lattices
@@ -48,9 +48,9 @@ bmadCondaEnv.yml         Conda environment specification
 ```
 
 
-## Helper utilities
+## Features
 
-Loading `UTILITY_quickstart.py` will import all the helper functions. These helper functions take many forms
+Loading `UTILITY_quickstart.py` will import all the utility functions. These functions take many forms
 
 ### Core functions
 
@@ -60,13 +60,15 @@ Loading `UTILITY_quickstart.py` will import all the helper functions. These help
 
 ### Other features
 
-- `UTILITY_setLattice` functions - translate between the language and units of the FACET-II control system and simulation
-- `UTILITY_linacPhaseAndAmplitude` - conveniently phase and set the gradients of the linacs
+- `UTILITY_setLattice` functions to translate between the language and units of the FACET-II EPICS control system and simulation
+- `UTILITY_linacPhaseAndAmplitude` which conveniently phase and set the gradients of the linacs
 - Plotting tools for displaying both beams and the beamline itself
 - Twiss optimizers for the final focus and golden lattice matching
 - Infrastructure for dealing with two-bunch operation
 - Various options of calculating spot sizes and emittances
 - Tools to model laser heater interactions
+- Mathematica notebooks which track and analyze optimizer progress
+- Mathematica notebooks which visualize beam files, including as 3D animations
 
 ## Notes on large files
 
