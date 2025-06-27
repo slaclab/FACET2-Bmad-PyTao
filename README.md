@@ -1,6 +1,6 @@
 # FACET-II (start-to-end) S2E Simulation Toolkit
 
-This repository contains utilities, Jupyter notebooks, and configuration files used to perform start-to-end (S2E) simulations of the [FACET-II](https://facet-ii.slac.stanford.edu/) beamline, a US Department of Energy National National User Facility.  The core workflow uses [IMPACT-T](https://github.com/impact-lbl/IMPACT-T) for beam generation and low energy transport, [Bmad and PyTao](https://www.classe.cornell.edu/bmad/) for most of the beam transport, and, optionally, [QPAD](https://picksc.physics.ucla.edu/qpad.html) for particle-in-cell simulations of the beam in plasma. It is intended to absract away unecessary detail so facility users can easily run the most common types of simulations including parameter scans, constrained optimization, and jitter sensitivity analysis.
+This repository contains utilities, Jupyter notebooks, and configuration files used to perform start-to-end (S2E) simulations of the [FACET-II](https://facet-ii.slac.stanford.edu/) particle accelerator beamline, a US Department of Energy National National User Facility.  The core workflow uses [IMPACT-T](https://github.com/impact-lbl/IMPACT-T) for beam generation and low energy transport, [Bmad, Tao, and PyTao](https://www.classe.cornell.edu/bmad/) for most of the beam transport through the kilometer-long linear accelerator, and, optionally, [QPAD](https://picksc.physics.ucla.edu/qpad.html) for particle-in-cell simulations of the beam in plasma, and [openPMD-beamphysics](https://github.com/ChristopherMayes/openPMD-beamphysics) for handling beam files. It is intended to abstract away unecessary detail so facility users can quickly and easily run the most common types of simulations including parameter scans, constrained optimization, and jitter sensitivity analysis.
 
 
 ## Installation
@@ -29,7 +29,7 @@ This repository contains utilities, Jupyter notebooks, and configuration files u
 
 The notebooks in the repository demonstrate typical workflows:
 
-* **`S3DF demo notebook.ipynb`** – runs a short Bmad simulation from an existing lattice and beam file.  It also introduces the helper functions for adjusting magnet and linac settings.
+* **`S3DF demo notebook.ipynb`** – runs a short Bmad simulation with a reference lattice and beam file.  It also introduces the helper functions for adjusting magnet and linac settings.
 * **`S3DF demo notebook - with IMPACT.ipynb`** – performs a full S2E run that generates the input beam with IMPACT‑T before tracking it through the lattice.
 
 Launch Jupyter, open one of these notebooks and run all cells to verify the installation.
@@ -50,14 +50,23 @@ bmadCondaEnv.yml         Conda environment specification
 
 ## Helper utilities
 
-The main convenience functions live in `UTILITY_quickstart.py` and related modules:
+Loading `UTILITY_quickstart.py` will import all the helper functions. These helper functions take many forms
 
-- `initializeTao()` – set up a Bmad/pytao instance, optionally running IMPACT‑T to create a beam.
-- `trackBeam()` – track the active beam through a portion of the lattice with optional energy checks and centring.
-- `setLattice()` – apply standard magnet and cavity settings from YAML files.
-- `finalFocusSolver()` – optimise the final focus quadrupoles to match desired Twiss parameters.
+### Core functions
 
-These modules can also be imported directly in your own analysis scripts.
+- `initializeTao()` – set up a Bmad/PyTao instance. Optionally run IMPACT‑T to create a beam.
+- `setLattice()` – apply lattice configuration to commonly changed knobs using a dictionary or reference file
+- `trackBeam()` – track a beam between arbitrary points in the lattice, applying specialized functions like centering or energy correction at checkpoints.
+
+### Other features
+
+- `UTILITY_setLattice` functions - translate between the language and units of the FACET-II control system and simulation
+- `UTILITY_linacPhaseAndAmplitude` - conveniently phase and set the gradients of the linacs
+- Plotting tools for displaying both beams and the beamline itself
+- Twiss optimizers for the final focus and golden lattice matching
+- Infrastructure for dealing with two-bunch operation
+- Various options of calculating spot sizes and emittances
+- Tools to model laser heater interactions
 
 ## Notes on large files
 
@@ -71,4 +80,4 @@ If you cannot use LFS, manually download the `.h5` beam files from another sourc
 
 ## Further documentation
 
-Most development work happens inside the notebooks.  The notebooks in the `ARCHIVE` folder track previous investigations and may serve as additional example.
+Most development work happens inside the notebooks.  The notebooks in the `ARCHIVE` folder track previous investigations and may serve as additional examples.
