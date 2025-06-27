@@ -49,6 +49,20 @@ def initializeTao(
     **kwargs
 ):
 
+    """
+    Initialize a tao object from PyTao
+
+    Specify the active file path
+
+    Specify the number of macroparticles
+
+    Either load a particular lattice or load the golden lattice
+
+    Have the option to randomize file paths to facilitate parallelization
+
+    Optionally enable transverse wakefields
+    """
+    
     #######################################################################
     #Set file path
     #######################################################################

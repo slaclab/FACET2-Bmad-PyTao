@@ -1,6 +1,6 @@
 # FACET-II (start-to-end) S2E Simulation Toolkit
 
-This repository contains utilities, Jupyter notebooks, and configuration files used to perform start-to-end (S2E) simulations of the [FACET-II](https://facet-ii.slac.stanford.edu/) particle accelerator beamline, a US Department of Energy National National User Facility which hosts hundreds of users a year.  The core workflow uses [IMPACT-T](https://github.com/impact-lbl/IMPACT-T) for beam generation and low energy transport, [Bmad, Tao, and PyTao](https://www.classe.cornell.edu/bmad/) for most of the beam transport through the kilometer-long linear accelerator, and, optionally, [QPAD](https://picksc.physics.ucla.edu/qpad.html) for particle-in-cell simulations of the beam in plasma, and [openPMD-beamphysics](https://github.com/ChristopherMayes/openPMD-beamphysics) for handling beam files. It is intended to abstract away unnecessary detail so facility users can quickly and easily run the most common types of simulations including parameter scans, constrained optimization of both Twiss and multiparticle tracking objectives, and jitter sensitivity analysis.
+This repository contains utilities, Jupyter notebooks, and configuration files used to perform start-to-end (S2E) simulations of the [FACET-II](https://facet-ii.slac.stanford.edu/) particle accelerator beamline, a US Department of Energy National National User Facility which hosts hundreds of users a year.  The core workflow uses [IMPACT-T](https://github.com/impact-lbl/IMPACT-T) for beam generation and low energy transport, [Bmad, Tao, and PyTao](https://www.classe.cornell.edu/bmad/) for most of the beam transport through the kilometer-long linear accelerator, and, optionally, [QPAD](https://picksc.physics.ucla.edu/qpad.html) for particle-in-cell simulations of the beam in plasma, and [openPMD-beamphysics](https://github.com/ChristopherMayes/openPMD-beamphysics) for handling beam files. It is intended to abstract away unnecessary detail so present or prospective facility users can quickly and easily run the most common types of simulations including parameter scans, constrained optimization of both Twiss and multiparticle tracking objectives, and jitter sensitivity analysis.
 
 
 ## Installation
@@ -62,7 +62,7 @@ Loading `UTILITY_quickstart.py` will import all the utility functions. These fun
 
 - `initializeTao()` – set up a Bmad/PyTao instance. Optionally run IMPACT‑T to create a beam.
 - `setLattice()` – apply lattice configuration to commonly changed knobs using a dictionary or reference file
-- `trackBeam()` – track a beam between arbitrary points in the lattice, applying specialized functions like centering or energy correction at checkpoints.
+- `trackBeam()` – track a beam between arbitrary points in the lattice, applying specialized functions like centering or energy correction at checkpoints
 
 ### Other features
 

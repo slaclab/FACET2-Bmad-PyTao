@@ -118,6 +118,8 @@ def OpenPMD_to_Bmad(filename,tOffset=None):
             if test_offset==True:
                 raise ValueError('openPMD file already includes timeOffset!')
             else:
+
+                
                 # Get data about particle status and paths (from OpenPMD library)
                 pp = pmd_beamphysics.readers.particle_paths(f)
                 assert len(pp) == 1, f'Number of particle paths in {filename}: {len(pp)}'
@@ -126,6 +128,8 @@ def OpenPMD_to_Bmad(filename,tOffset=None):
                 
                 # filter and do calculations
                 idx=np.array(data['status'])==1
+
+                
                 
                 # Check tOffset
                 if tOffset is not None:
