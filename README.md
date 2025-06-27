@@ -1,42 +1,81 @@
-# Typical installation 
+# FACET-II S2E Simulation Toolkit
 
-Start by setting up a Conda environment using bmadCondaEnv.yml (https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html)
+This repository contains utilities, Jupyter notebooks and configuration files used to perform start-to-end (S2E) simulations of the FACET-II electron beam line.  The workflow relies on the [Bmad](https://www.classe.cornell.edu/bmad/) accelerator physics library together with [IMPACT-T](https://github.com/ChristopherMayes/impact) for initial beam generation.
 
-Try executing "S3DF demo notebook.ipynb"; this should, using only a few lines, perform and plot an output from a Bmad simulation from a pre-generated lattice and beam file. It will also demonstrate some of the helper functions for changing magnet and linac settings.
+The project grew out of a collection of notebooks and helper scripts.  Everything needed to launch a simulation, modify lattice settings and analyse the beam is included here.
 
-"S3DF demo notebook - with IMPACT.ipynb" will demonstrate a start-to-end simulation which uses IMPACT-T for the beam generation
+## Installation
 
-# Additional notes
+1. **Clone with Git LFS**
+   ```bash
+   git clone https://<your-fork> FACET2-S2E
+   cd FACET2-S2E
+   git lfs pull
+   ```
+   Many beam files are tracked with Git LFS.  Without LFS the notebooks will fail to load example beams.
 
-## Git LFS
+2. **Create the conda environment**
+   ```bash
+   conda env create -f bmadCondaEnv.yml
+   conda activate bmad
+   ```
+   If this fails you may manually install the key packages:
+   ```bash
+   conda install jupyter numpy matplotlib pandas
+   conda install -c conda-forge bmad pytao openpmd-beamphysics distgen lume-base lume-impact bayesian-optimization
+   ```
 
-This repo uses Git LFS. Strongly recommend installing it: https://docs.github.com/en/repositories/working-with-files/managing-large-files/installing-git-large-file-storage
+## Quick start
 
-Alternative is to manually download the requisite large files (namely .h5 beam files). Otherwise you'll get errors like
+The notebooks in the repository demonstrate typical workflows:
+
+* **`S3DF demo notebook.ipynb`** – runs a short Bmad simulation from an existing lattice and beam file.  It also introduces the helper functions for adjusting magnet and linac settings.
+* **`S3DF demo notebook - with IMPACT.ipynb`** – performs a full S2E run that generates the input beam with IMPACT‑T before tracking it through the lattice.
+
+Launch Jupyter, open one of these notebooks and run all cells to verify the installation.
+
+## Repository layout
 
 ```
-/opt/conda/lib/python3.12/site-packages/pmd_beamphysics/particles.py:681: SyntaxWarning: invalid escape sequence '\l'
-  """
----------------------------------------------------------------------------
-OSError                                   Traceback (most recent call last)
-Cell In[2], line 1
-----> 1 tao = initializeTao(
-      2     inputBeamFilePathSuffix = '/beams/nmmToL0AFEND_2bunch_2024-02-16Clean/2024-02-16_2bunch_1e5Downsample_nudgeWeights_driverOnly_2023-05-16InjectorMatch.h5'
-      3 )
+ARCHIVE/                 Older studies and experimental notebooks
+beams/                   Example beams and scripts to generate them
+bmad/                    FACET-II lattice descriptions and conversion tools
+impact/                  Supplementary IMPACT‑T configuration files
+other_configs/           Steering and misalignment configuration JSON files
+setLattice_configs/      Default magnet settings in YAML format
+UTILITY_*.py             Helper modules used by the notebooks
+bmadCondaEnv.yml         Conda environment specification
+```
 
-...
+*The `beams/2024-07-01_Impact_TwoBunch` directory contains a small README describing how one of the reference beams was produced with IMPACT‑T.*
 
-File h5py/h5f.pyx:102, in h5py.h5f.open()
+The `bmad/conversion` folder documents how to regenerate the Bmad lattice from SLAC MAD optics files.  See `bmad/conversion/README.md` for the full procedure.
 
+## Helper utilities
+
+The main convenience functions live in `UTILITY_quickstart.py` and related modules:
+
+- `initializeTao()` – set up a Bmad/pytao instance, optionally running IMPACT‑T to create a beam.
+- `trackBeam()` – track the active beam through a portion of the lattice with optional energy checks and centring.
+- `setLattice()` – apply standard magnet and cavity settings from YAML files.
+- `finalFocusSolver()` – optimise the final focus quadrupoles to match desired Twiss parameters.
+
+These modules can also be imported directly in your own analysis scripts.
+
+## Notes on large files
+
+Git LFS is required because beam files can be tens of megabytes.  Without LFS you may see errors such as:
+
+```
 OSError: Unable to synchronously open file (file signature not found)
 ```
 
-## Other Conda hints
+If you cannot use LFS, manually download the `.h5` beam files from another source and place them in the appropriate directories.
 
-If the Conda environment files don't work, try:
+## Further documentation
 
-`conda install jupyter numpy matplotlib pandas`
+Most development work happens inside the notebooks.  The notebooks in the `ARCHIVE` folder track previous investigations and may serve as additional examples.  Feel free to explore them once the environment is working.
 
-`conda install -c conda-forge bmad pytao openpmd-beamphysics distgen lume-base lume-impact bayesian-optimization`
+## Support
 
-But from here, you'll just need to try running things and seeing if you can play whack-a-mole with the errors
+This repository is provided as-is without an official support channel.  The notebooks should serve as both documentation and working examples for running FACET-II S2E simulations.
