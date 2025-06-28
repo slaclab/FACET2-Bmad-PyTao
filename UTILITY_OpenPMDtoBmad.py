@@ -87,7 +87,7 @@ def search_list_partial(l,searchterm):
         y=False
     return y
 
-def OpenPMD_to_Bmad(filename,tOffset=None):
+def OpenPMD_to_Bmad(filename,tOffset=None,species='electron'):
     """
     Convert from OpenPMD to Bmad h5 format after checking to make sure it is not in Bmad format first
     
@@ -118,18 +118,15 @@ def OpenPMD_to_Bmad(filename,tOffset=None):
             if test_offset==True:
                 raise ValueError('openPMD file already includes timeOffset!')
             else:
-
-                
                 # Get data about particle status and paths (from OpenPMD library)
                 pp = pmd_beamphysics.readers.particle_paths(f)
                 assert len(pp) == 1, f'Number of particle paths in {filename}: {len(pp)}'
+                pp[0] = pp[0] + '/' + species
                 data = pmd_beamphysics.particles.load_bunch_data(f[pp[0]])
                 
                 
                 # filter and do calculations
                 idx=np.array(data['status'])==1
-
-                
                 
                 # Check tOffset
                 if tOffset is not None:
@@ -140,8 +137,20 @@ def OpenPMD_to_Bmad(filename,tOffset=None):
                 # If no offset is provided
                 if tOffset is None:
                     weights=data['weight']
+                    if len(f[pp[0]]['time'])==0:
+                        if os.path.isfile('drifted_'+filename):
+                            raise ValueError("No time data exists, but drift_to_z() does not resolve the issue")
+                        else:
+                            P_1 = ParticleGroup(filename)
+                            P_1.drift_to_z()
+                            P_1.write('drifted_'+filename)
+                            
+                            OpenPMD_to_Bmad('drifted_'+filename)
+                            os.rename(('drifted_'+filename),filename)
+                            return
+                        
                     tref=np.average(np.array(f[pp[0]]['time'])[idx],weights=weights[idx])
-                
+
                 #Otherwise just use that
                 else:
                     tref=tOffset
