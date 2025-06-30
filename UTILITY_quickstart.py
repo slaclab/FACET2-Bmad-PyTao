@@ -533,7 +533,10 @@ def nudgeMacroparticleWeights(
     return P
 
 def getDriverAndWitness(P):
-    #See, e.g. "2024-07-01 Nudge Macroparticle Weights.ipynb" for details
+    """Splits a beam by unique weights into  drive and witness beam objects
+    
+    See, e.g. "2024-07-01 Nudge Macroparticle Weights.ipynb" for details
+    """
     
     weights = np.sort(np.unique(P.weight))
     if len(weights) != 2:
@@ -550,7 +553,7 @@ def writeBeam(P, fileName):
     OpenPMD_to_Bmad(fileName)
 
 def makeBeamActiveBeamFile(P, tao = None):
-    #Weird structure on this function for backwards compatiblity. If no tao object is provided, put the beam in the nominal location. Otherwise, put it in the right place
+
     global filePathGlobal
 
     if tao:
@@ -578,16 +581,21 @@ def smallestInterval(nums, percentage=0.9):
 
 
 def smallestIntervalImpliedSigma(nums, percentage=0.9):
+    """Given a smallestInterval, infer the sigma assuming the distribution was Gaussian
+
+    See "Discussion of alternative emittance and spot size calculations.ipynb"
+    See also "2024-07-01 RMS vs FWHM at PENT.ipynb"
+    """
     interval = smallestInterval(nums, percentage)
     intervalToSigmaFactor = scipy.special.erfinv(percentage) * (2 * np.sqrt(2))
     return interval/intervalToSigmaFactor
 
-#See "Discussion of alternative emittance and spot size calculations.ipynb"
-#See also "2024-07-01 RMS vs FWHM at PENT.ipynb"
 def smallestIntervalImpliedEmittanceModelFunction(z, sigmax, sigmaxp, rho):
     return np.sqrt(sigmax**2 + 2 * z * rho * sigmax * sigmaxp + z**2 * sigmaxp**2)
 
 def smallestIntervalImpliedEmittance(P, plane = "x", percentage = 0.9, verbose = False):
+    """Use a virtual quad scan and smallestInterval measurements to calculate a beam's emittance"""
+    
     #zValues = np.arange(-20, 20, 0.1)
     zValues = np.array([-131.072, -65.536, -32.768, -16.384, -8.192, -4.096, -2.048, -1.024, 
                -0.512, -0.256, -0.128, -0.064, -0.032, -0.016, -0.008, -0.004, 
