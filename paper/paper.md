@@ -1,29 +1,29 @@
 ---
-# Example from https://joss.readthedocs.io/en/latest/submitting.html
-title: 'ConFluxPro: A toolkit for soil gas analysis'
+title: 'FACET-S2E: Start-to-end simulations of the FACET-II beamline'
 tags:
-  - R
-  - soil gas
-  - flux-gradient method
-  - flux
+  - accelerator physics
+  - plasma physics
+  - python
 authors:
-  - name: Valentin Gartiser
-    orcid: 0000-0001-5320-374X
-    affiliation: "1, 2" # (Multiple affiliations must be quoted)
-  - name: Verena Lang
-    orcid: 0000-0002-5316-2746
+  - name: Nathan Majernik
+    corresponding: true
+    orcid: 0000-0001-9977-0248
     affiliation: 1
-  - name: Martin Maier
-    orcid: 0000-0002-7959-0108
-    affiliation: 2
+  - name: Eric Cropp
+    orcid: 0000-0000-0000-0000
+    affiliation: 1
+  - name: Claudio Emma
+    orcid: 0000-0000-0000-0000
+    affiliation: 1
+  - name: Thamine Dalichaouch
+    orcid: 0000-0000-0000-0000
+    affiliation: 2             
 affiliations:
- - name: Forest Research Institute, Freiburg, Germany
+ - name: SLAC National Accelerator Laboratory, USA
    index: 1
- - name: Soil Physics, Department of Crop Sciences, Göttingen, Germany
+ - name: University of California, Los Angeles, USA
    index: 2
-citation_author: Gartiser et al.
-date: 05 November 2024
-year: 2024
+date: 30 June 2025
 bibliography: paper.bib
 output: rticles::joss_article
 csl: apa.csl
@@ -32,61 +32,26 @@ journal: JOSS
 
 
 
-# Summary
-``ConFluxPro`` is an R-package to model soil gas fluxes with the flux-gradient method (FGM).
-The FGM is a cost-effective way to measure fluxes and production rates of gases in soils [@Maier2014].
-It relies on the principle that gas exchange in soils is driven by molecular diffusion and can therefore be described by Fick's first law of diffusion.
-In situ, it requires measuring vertical concentration profiles of soil gases and parameters to estimate the diffusivity of the soil.
-Flux rates can then be modeled by deriving concentration gradients and diffusion coefficients of soil gases.
 
-We developed ``ConFluxPro`` to assist along the entire modeling process, from data handling and preparation to flux modeling and beyond.
-The package (I) provides object classes for the preparation, combination and modification of soil gas and physical data, (II) implements different common FGM models, (III) introduces an inverse modeling approach, (IV) provides functions for post-hoc calibration and (V) uncertainty estimation of the model results.
-All this functionality was built to be modular and user-friendly on the outside with robust internals handling more complex data manipulations.
-This makes it easy to implement an individual approach to the FGM, while improving the reproducibility of the analysis.
+# Summary
+
+`FACET2-S2E` is a Python package for start-to-end simulations of the Facility for Advanced Accelerator Experimental Tests-II (FACET-II) {{cite website and “FACET-II facility for advanced accelerator experimental tests”}}, a US Department of Energy National User Facility. A kilometer-long particle accelerator creates, manipulates, and accelerates electron beams to over 10 GeV before focusing and compressing them to the micron-scale. These beams create extreme electric and magnetic fields on the femtosecond timescale, uniquely enabling research into exotic states and advanced accelerator technology, including plasma wakefield acceleration. This software package enables present or prospective facility users to quickly and easily run the most common types of simulations to design experiments and interpret results.
+
 
 # Statement of need
 
-The FGM is conceptually simple and has been applied in numerous studies.
-However, codes or evaluation files have often not been shared publicly and there are differences between individual implementations.
-For example, concentration gradients may be calculated using a linear regression [@Tang2003], simple differences between depths [@Jong1972] or by fitting exponential functions [@Davidson2006].
-While there may be valid reasons to favour one approach over another within any study, this makes it hard to compare results between studies. 
-Furthermore, the uncertainty of the approach due to soil heterogeneity and measurement uncertainty is often not considered.
-Still, the FGM is uniquely equipped to address questions on subsurface processes and for long-term measurement [@Maier2020].
-The goal of ``ConFluxPro`` was to make the FGM easy to implement, flexible and reproducible.
+`FACET2-S2E` is a Python package which contains utilities, Jupyter notebooks, and configuration files used to perform start-to-end (S2E) simulations of the FACET-II particle accelerator beamline, a facility which hosts hundreds of external users a year. The core workflow uses IMPACT-T {{cite}} for beam generation and low energy transport, Bmad, Tao, and PyTao {{cite}} for most of the beam transport through the kilometer-long linear accelerator, and, optionally, QPAD {{cite}} for particle-in-cell simulations of the beam in plasma, and openPMD-beamphysics {{cite}} for handling beam files. 
 
-A first challenge in applying the FGM is to combine the various input parameters needed for the flux calculation.
-These may be from different sources (online measurement or soil samples), be of different types (volumetric or point measurements) and have different spatial and temporal resolutions. 
-For this reason, ``ConFluxPro`` first implements different functions and object classes to shape the data into a predictable frame.
-Once the data is unified in this way, all subsequent operations can be mostly handled internally.
-This limits the need for user intervention, both making it easier to implement and reducing an important source of error in the analysis.
+Present or prospective facility users can quickly and easily run the most common types of simulations including parameter scans, constrained optimization of both Twiss and multiparticle tracking objectives, and jitter sensitivity analysis, since `FACET2-S2E` abstracts away unnecessary detail. The package seamlessly chains together multiple codes, provides reference configurations, and offers templates for common development and optimization tasks, so beam physicists can focus on the physics.
 
-Apart from the commonly used approaches, ``ConFluxPro`` also comes with an inverse model to estimate profiles of gas production rates similar to @SchackKirchner2011.
-Instead of deriving concentration gradients from the measurements, the model calculates a concentration profile form assumed production (or consumption) rates.
-This profile is then fit to the measurements by algorithmically optimizing the production rates. 
-The advantage of the inverse model is that the entire profile is consistently described by functions derived from physical laws.
-While this approach is conceptually more advanced, it is as easy to use within the package.
+The package translates between the language and units of the underlying codes and the real-world EPICS {{cite}} control system. This package is readily integrated into control room tools, both importing real values into simulations and using the simulation optimizers to write new values to the machine. It also abstracts away details (e.g. specific magnet values) instead allowing users to focus on specifying desired higher-level goals (e.g. beam qualities).
 
-Soil heterogeneity and measurement error introduces uncertainty in FGM models.
-This is addressed in ``ConFluxPro`` in two ways.
-First, we implemented a calibration approach to reduce the differences between modeled and reference flux rates (e.g. from chamber measurements).
-Second, a bootstrapping approach gives an estimate of the model uncertainty introduced from the variability of the input parameters.
+While under development, this package has been used to support various experiments including those }} and {{Plasma-Wakefield Accelerator Simultaneously Boosts Electron Beam Energy and Brightness}}
 
-``ConFluxPro`` is a versatile toolkit to model soil gas fluxes with the FGM.
-During development, we have already used it in multiple studies [@Maier2020; @Jochheim2022]. 
-The scientific background of the methods is described in @Gartiser2025.
-By sharing this package we hope to make it easier to implement the FGM in future studies, furthering our knowledge of important soil processes.
 
-# Related software
+# Acknowledgements
 
-To our knowledge, there is currently no other comprehensive implementation of the FGM.
-An approach in `Python` is described in @Bittelli2015.
-The package [``neonSoilFlux``](https://github.com/jmzobitz/neonSoilFlux) [@Zobitz2024] implements the FGM specificly to the National Ecological Observatory Network (NEON).
-There are multiple R-packages to help with the analysis of chamber measurement data, 
-[``gasfluxes``](https://git-dmz.thuenen.de/fuss/gasfluxes) [@Fuss2016], [``goFlux``](https://github.com/Qepanna/goFlux) [@Rheault2024] and [``FluxCalR``](https://github.com/junbinzhao/FluxCalR) [@Zhao2019].
-
-# Funding
-
-This work was funded in part by the WKF (Waldklimafond/Forest Climate Fund) and the FNR (Fachagentur Nachwachsende Rohstoffe e.V.), jointly managed by the Federal Ministry for the Environment (BMU) and the Federal Ministry of Food and Agriculture (BMEL)—grant number 2218WK58X4.
+This work was supported by the U.S. Department of Energy under DOE Contract No. DEAC02-76SF00515. The authors thank M. Ehrlichman and C. Mayes for sharing their Bmad expertise and D. Cesar for his floorplan plotting function.
 
 # References
 
