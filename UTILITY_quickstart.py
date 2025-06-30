@@ -656,7 +656,7 @@ def getMatrix(tao, start, end, order = 1, startOffset = 0, endOffset = 0, print 
         transportMatrix = np.array([float(str) for str in allStrings[0].split()])
     
     elif order == 1:
-        allStrings = tao.show(f"taylor_map -s {startS} {endS}")
+        allStrings = tao.show(f"taylor_map -order 1 -s {startS} {endS}")
         splitStrings = [str.split() for str in allStrings]
         transportMatrix = np.array([ [float(str) for str in row[0:6]] for row in splitStrings[2:] ])
 
