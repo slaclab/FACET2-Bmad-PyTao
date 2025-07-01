@@ -591,7 +591,11 @@ def smallestIntervalImpliedSigma(nums, percentage=0.9):
     return interval/intervalToSigmaFactor
 
 def smallestIntervalImpliedEmittanceModelFunction(z, sigmax, sigmaxp, rho):
-    return np.sqrt(sigmax**2 + 2 * z * rho * sigmax * sigmaxp + z**2 * sigmaxp**2)
+
+    return np.sqrt(np.clip(
+        sigmax**2 + 2 * z * rho * sigmax * sigmaxp + z**2 * sigmaxp**2,
+        0, np.inf))
+
 
 def smallestIntervalImpliedEmittance(P, plane = "x", percentage = 0.9, verbose = False):
     """Use a virtual quad scan and smallestInterval measurements to calculate a beam's emittance"""
@@ -624,7 +628,9 @@ def smallestIntervalImpliedEmittance(P, plane = "x", percentage = 0.9, verbose =
 
 
     
-    emit_opt = np.sqrt( sigmax_opt**2 * sigmaxp_opt**2 - (rho_opt * sigmax_opt * sigmaxp_opt)**2 )
+    emit_opt = np.sqrt(np.clip( 
+        sigmax_opt**2 * sigmaxp_opt**2 - (rho_opt * sigmax_opt * sigmaxp_opt)**2 ,
+        0, np.inf))
 
 
     if verbose:
