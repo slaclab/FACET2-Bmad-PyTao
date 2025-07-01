@@ -53,7 +53,7 @@ def initializeTao(
     **kwargs
 ):
 
-    """Initialize a Tao simulation instance.
+    """Initialize a Tao object
 
     Parameters
     ----------

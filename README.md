@@ -32,13 +32,17 @@ The notebooks in the repository demonstrate typical workflows:
 * **`Example - Basic introduction.ipynb`** – runs a short Bmad simulation with a reference lattice and beam file.  It also introduces some basic functionality like reading and setting magnets using control system units, phasing linacs, etc.
 * **`Example - IMPACT-T beam generation.ipynb`** – performs a full S2E run that generates the input beam with IMPACT‑T before tracking it through the lattice.
 * **`Example - Final focus tuning.ipynb`** – demonstrates the final focus optics optimizer to pick magnet settings to achieve desired Twiss
-* **`Example - Multiparticle racking optimization.ipynb`** – demonstrates optimization constrained by real-world hardware limits of a multiparticle tracked beam
-* **`Example - Solution postprocessing and analysis.ipynb`** – postprocessing and analysis of both the beam throughout the lattice
+* **`Example - Multiparticle tracking optimization.ipynb`** – demonstrates optimization constrained by real-world hardware limits of a multiparticle tracked beam
+* **`Example - Solution postprocessing and analysis.ipynb`** – postprocessing and analysis of the beam throughout the lattice
 * **`Example - Beam visualization.nb`** – Mathematica notebook for advanced beam visualization and analysis, including 3D animation generation
 * **`Example - Optimization progress dashboard.nb`** – Mathematica companion notebook which visualizes optimization progress, e.g. parameter sensitivities and convergence
 * **`Example - Jitter study.py`** – Parallel computation of many simulations with parameters subject to jitter, informed by real-world measurements
 
 Launch Jupyter, open one of these notebooks and run all cells to verify the installation.
+
+### Tests
+
+When run, "Example" notebooks should reproduce the figures and results of the notebooks in the repo, up to random error resulting from RNG subsampling
 
 ## Repository layout
 
@@ -89,3 +93,8 @@ If you cannot use LFS, manually download the `.h5` beam files from another sourc
 ## Further documentation
 
 Most development work happens inside the notebooks.  The notebooks in the `ARCHIVE` folder track previous investigations and may serve as additional examples.
+
+
+## Support
+
+For support, contact @majernik-slac-stanford-edu
