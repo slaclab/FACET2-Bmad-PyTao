@@ -439,11 +439,11 @@ def trackBeam(
     # tao.cmd(f'set beam_init position_file={filePathGlobal}/beams/activeBeamFile.h5')
     # tao.cmd('reinit beam')
 
-def trackBeamLEGACY(tao):
-    #This is the pre-2024-08-23 version of trackBeam(), retained for debugging purposes. Can be deleted
+# def trackBeamLEGACY(tao):
+#     #This is the pre-2024-08-23 version of trackBeam(), retained for debugging purposes. Can be deleted
     
-    tao.cmd('set global track_type = beam') #set "track_type = single" to return to single particle
-    tao.cmd('set global track_type = single') #return to single to prevent accidental long re-evaluation
+#     tao.cmd('set global track_type = beam') #set "track_type = single" to return to single particle
+#     tao.cmd('set global track_type = single') #return to single to prevent accidental long re-evaluation
 
 def trackBeamHelper(tao):
     """Wrap some of the tao commands with a try/except. This way if tracking doesn't work, we failsafe to track_type = single"""
@@ -1130,7 +1130,7 @@ def launchTwissCorrection(tao,
     """
     This function will update the BEGINNING twiss values (set in bmad/models/f2_elec/f2_elec.lat.bmad, e.g. BEGINNING[BETA_A] =  1.39449126865854395E-001) to achieve an arbitrary match at an arbitrary element.
 
-    By default though, if no element is specified, the function will create the default golden lattice match at PR10571
+    If no element is specified, the function will create the default golden lattice match at PR10571
     """
     
     from scipy.optimize import minimize
@@ -1260,8 +1260,6 @@ def disableAutoMagnetEnergyCompensation(tao):
     The golden lattice, by default, has the magnets set according to the design K# rather than a fixed field.
     For "typical" simulations, this is a good approach. It's basically assuming that we LEM the machine
     For some edge cases, like jitter simulations, we don't want the magnets to be changing though
-
-    This function may not be exhaustive... beware!
     """ 
     
     tao.cmd("set ele Solenoid::* FIELD_MASTER = T")
