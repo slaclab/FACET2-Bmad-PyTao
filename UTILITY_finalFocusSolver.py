@@ -51,12 +51,48 @@ def finalFocusSolver(
     targetAlphaX = 0,
     targetBetaY = 0.5,
     targetAlphaY = 0,
+    initialGuess = None,
+    returnVariablesOrNames = "variables",
     verbose = False
 ):
 
+    """Find final focus optics to achieve desired Twiss
+
+    Parameters
+    ----------
+    tao : Tao object
+        Active tao object
+    ele : str
+        Name of element where optimization is performed
+    s_offset : float
+        Relative longitudinal offset from ele for Twiss calculation. Positive = downstream
+
+    targetBetaX, targetAlphaX, targetBetaY, targetAlphaY : float
+        Desired Twiss parameters
+
+    initialGuess : dict
+        Optionally specify the initial guess for the optimizer. Otherwise uses golden lattice
+
+    returnVariablesOrNames : "variables" or "name"
+        Specifies if the returned solution dictionary is in terms of setLattice() variables (e.g. "Q5FFkG") or element names (e.g. "Q5FF")
+
+    verbose : bool
+        Print optimizer info
+
+    Returns
+    -------
+    dict
+        Dictionary of final focus magnet values
+    """
 
     quadNameList = ["Q5FF", "Q4FF", "Q3FF", "Q2FF", "Q1FF", "Q0FF"] 
-    initialGuess = [getQuadkG(tao, name) for name in quadNameList]
+    quadVariableNameList = ["Q5FFkG", "Q4FFkG", "Q3FFkG", "Q2FFkG", "Q1FFkG", "Q0FFkG"] 
+
+    if not initialGuess:
+        initialGuess = { name+"kG" : getQuadkG(tao, name) for name in quadNameList }
+
+    #Dictionary to vector
+    initialGuess = [ initialGuess[name] for name in quadVariableNameList ]
 
     #For now, just hardcoding bounds... could generalize if required
     #From "bounds.yml" as of 2025-01-10-11-11-35
@@ -80,19 +116,6 @@ def finalFocusSolver(
     )
 
 
-    # #Apply best result to the lattice
-    # betaSetX, alphaSetX, betaSetY, alphaSetY = result.x
-    
-    # #Prevent recalculation until changes are made
-    # tao.cmd("set global lattice_calc_on = F")
-    
-    # tao.cmd(f"set element beginning beta_a = {betaSetX}")
-    # tao.cmd(f"set element beginning alpha_a = {alphaSetX}")
-    # tao.cmd(f"set element beginning beta_b = {betaSetY}")
-    # tao.cmd(f"set element beginning alpha_b = {alphaSetY}")
-    
-    # #Reenable lattice calculations
-    # tao.cmd("set global lattice_calc_on = T")
 
     if verbose:
         print("Optimization Results:")
@@ -101,8 +124,12 @@ def finalFocusSolver(
         print(f"Number of Iterations: {result.nit}")
         print(f"Converged: {result.success}")
 
-    quadVariableNameList = ["Q5FFkG", "Q4FFkG", "Q3FFkG", "Q2FFkG", "Q1FFkG", "Q0FFkG"] 
+    
 
     
-    
-    return { quadVariableNameList[i] : result.x[i] for i in range(len(quadVariableNameList)) }
+    if returnVariablesOrNames == "variables":     
+        return { quadVariableNameList[i] : result.x[i] for i in range(len(quadVariableNameList)) }
+    elif returnVariablesOrNames == "names":     
+        return { quadNameList[i] : result.x[i] for i in range(len(quadVariableNameList)) }
+    else:
+        print("Illegal returnVariablesOrNames") 
