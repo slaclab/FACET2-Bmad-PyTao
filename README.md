@@ -8,7 +8,7 @@ This repository contains utilities, Jupyter notebooks, and configuration files u
 
 1. **Clone with Git LFS**
    ```bash
-   git clone https://<your-fork> FACET2-S2E
+   git clone https://github.com/slaclab/FACET2-S2E.git
    cd FACET2-S2E
    git lfs pull
    ```
@@ -19,7 +19,7 @@ This repository contains utilities, Jupyter notebooks, and configuration files u
    conda env create -f bmadCondaEnv.yml
    conda activate bmad
    ```
-   If this fails you may manually install the key packages:
+   Alternatively, directly install key packages:
    ```bash
    conda install jupyter numpy matplotlib pandas
    conda install -c conda-forge bmad pytao openpmd-beamphysics distgen lume-base lume-impact bayesian-optimization
@@ -29,16 +29,15 @@ This repository contains utilities, Jupyter notebooks, and configuration files u
 
 The notebooks in the repository demonstrate typical workflows:
 
-* **`Example - Basic introduction.ipynb`** – runs a short Bmad simulation with a reference lattice and beam file.  It also introduces some basic functionality like reading and setting magnets using control system units, phasing linacs, etc.
-* **`Example - IMPACT-T beam generation.ipynb`** – performs a full S2E run that generates the input beam with IMPACT‑T before tracking it through the lattice.
+* **`Example - Basic introduction.ipynb`** – runs Bmad simulations with a reference lattice and beam file.  It also introduces some basic functionality like reading and setting magnets using control system units, phasing linacs, etc.
+* **`Example - IMPACT-T beam generation.ipynb`** – performs a full S2E run that generates the input beam with IMPACT‑T before tracking it through the lattice to the end of the beamline
 * **`Example - Final focus tuning.ipynb`** – demonstrates the final focus optics optimizer to pick magnet settings to achieve desired Twiss
 * **`Example - Multiparticle tracking optimization.ipynb`** – demonstrates optimization constrained by real-world hardware limits of a multiparticle tracked beam
 * **`Example - Solution postprocessing and analysis.ipynb`** – postprocessing and analysis of the beam throughout the lattice
 * **`Example - Beam visualization.nb`** – Mathematica notebook for advanced beam visualization and analysis, including 3D animation generation
 * **`Example - Optimization progress dashboard.nb`** – Mathematica companion notebook which visualizes optimization progress, e.g. parameter sensitivities and convergence
 * **`Example - Jitter study.py`** – Parallel computation of many simulations with parameters subject to jitter, informed by real-world measurements
-
-Launch Jupyter, open one of these notebooks and run all cells to verify the installation.
+* 
 
 ### Tests
 
@@ -52,8 +51,8 @@ beams/                   Reference beams and scripts to generate them
 bmad/                    Bmad 'golden lattice' (https://github.com/slaclab/facet2-lattice)
 impact/                  IMPACT‑T configuration files
 other_configs/           Atypical configurations including misalignment and steering solutions
-setLattice_configs/      Reference lattices
-UTILITY_*.py             Helper functions
+setLattice_configs/      Reference configurations
+UTILITY_*.py             Utility functions
 bmadCondaEnv.yml         Conda environment specification
 ```
 
@@ -64,15 +63,15 @@ Loading `UTILITY_quickstart.py` will import all the utility functions. These fun
 
 ### Core functions
 
-- `initializeTao()` – set up a Bmad/PyTao instance. Optionally run IMPACT‑T to create a beam.
+- `initializeTao()` – set up a Bmad/PyTao instance. Optionally run IMPACT‑T to create a beam or import a reference beam
 - `setLattice()` – apply lattice configuration to commonly changed knobs using a dictionary or reference file
 - `trackBeam()` – track a beam between arbitrary points in the lattice, applying specialized functions like centering or energy correction at checkpoints
 
 ### Other features
 
 - `UTILITY_setLattice` functions to translate between the language and units of the FACET-II EPICS control system and simulation
-- `UTILITY_linacPhaseAndAmplitude` which conveniently phase and set the gradients of the linacs
-- Plotting tools for displaying both beams and the beamline itself
+- `UTILITY_linacPhaseAndAmplitude` which conveniently phases and sets the gradients of the linacs
+- Plotting tools for displaying beams and the beamline itself
 - Twiss optimizers for the final focus and golden lattice matching
 - Infrastructure for dealing with two-bunch operation
 - Various options of calculating spot sizes and emittances
@@ -92,7 +91,7 @@ If you cannot use LFS, manually download the `.h5` beam files from another sourc
 
 ## Further documentation
 
-Most development work happens inside the notebooks.  The notebooks in the `ARCHIVE` folder track previous investigations and may serve as additional examples.
+Most development work happens inside the notebooks.  The notebooks in the `ARCHIVE` folder are previous investigations and may serve as additional examples.
 
 
 ## Support
