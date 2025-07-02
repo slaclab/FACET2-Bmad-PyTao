@@ -12,6 +12,7 @@ from IPython.display import display, clear_output, update_display
 import bayes_opt
 import shutil
 from scipy.special import jn as besselj
+from scipy.interpolate import interp1d
 import json
 
 import scipy
@@ -237,29 +238,47 @@ def trackBeam(
     tao,
     trackStart = "L0AFEND",
     trackEnd = "end",
-    laserHeater = False,
+    
+    
     centerDL10 = False,
     centerBC14 = False,
-    assertBC14Energy = False,
     centerBC20 = False,
-    assertBC20Energy = False,
-    allCollimatorRules = None,
     centerMFFF = False,
+    
+    assertBC14Energy = False,
+    assertBC20Energy = False,
+    
+    laserHeater = False,
+    allCollimatorRules = None,
+    
     verbose = False,
     **kwargs,
 ):
     """Tracks the beam in activeBeamFile.h5 through the lattice presently in tao from trackStart to trackEnd
+    
+    Parameters
+    ----------
+    tao : pytao object
+    
+    trackStart, trackEnd : str
+        Element names where tracking starts and ends
 
-    Some special options are available but disabled by default
-    * Centering
-     * At some selected treaty points, remove net offsets to transverse position and angle
-    * Assert energy
-     * Centering must be enabled. Can either set True (for default energy at that point) or the desired energy in eV. This is effectively a virtual energy feedback
-    * Laser heater
-     * Refer to addLHmodulation(). Need to pass additional options to trackBeam() as **kwargs
-    * BC20 collimators
-     * Refer to collimateBeam(). Collimator positions passed as allCollimatorRules
+    center* : bool
+        Option to dump the beam at that location, center it, and reload it
+
+    assert*Energy : bool, float
+        Option to also correct the median beam energy. If True, uses default values (e.g. 4.5 GeV in BC14, 10 GeV in BC20). Sets to arbitrary value if float
+
+    laserHeater : dict
+        If not False, laser heater is enabled. Dictionary is passed to addLHmodulation(). See addLHmodulation() for options
+
+    allCollimatorRules : list of lists
+        If not False, BC20 notch and/or jaw collimators enabled. list is passed to collimateBeam(). See collimateBeam() for details
+
+    verbose : bool
+        Print progress info
     """
+    
     global filePathGlobal
 
 
@@ -293,7 +312,7 @@ def trackBeam(
 
         P = getBeamAtElement(tao, "HTRUNDF", tToZ = False)
 
-        PAfterLHmodulation, deltagamma, t = addLHmodulation(P, **kwargs,);
+        PAfterLHmodulation, deltagamma, t = addLHmodulation(P, **laserHeater);
         
         writeBeam(PAfterLHmodulation, tao.patchFilePath)
         if verbose: print(f"Beam with LH modulation written to {tao.patchFilePath}")
@@ -716,51 +735,205 @@ def setLatticeAndGetMatrix(tao, start, end, startOffset = 0, endOffset = 0, defa
     return getMatrix(tao, start, end, startOffset = startOffset, endOffset = endOffset)
 
 
+# Historical version which only allows gaussian laser time profiles
+# def addLHmodulation(
+#     inputBeam, 
+#     #Elaser, 
+#     showplots=False,
+#     laserHeater_laserEnergy = 0.5e-3,
+#     laserHeater_sigma_t =  (2 / 2.355) * 1e-12,
+#     laserHeater_offset = -0.5
+# ):
+#     """ From C. Emma, 2024-08-23 """
+#     # Hardcode FACET-II laser and undulator parameters
+#     # Laser parameters
+#     Elaser = laserHeater_laserEnergy
+#     lambda_laser = 760e-9
+#     sigmar_laser = 200e-6
+#     sigmat_laser = laserHeater_sigma_t # (2 / 2.355) * 1e-12
+#     Plaser = Elaser / np.sqrt(2 * np.pi * sigmat_laser**2)
+#     offset = laserHeater_offset #-0.5  # laser to e-beam offset if you want you can add it
+#     # Undulator parameters
+#     K = 1.1699
+#     lambdaw = 0.054
+#     Nwig = 9
+#     # Electron beam
+#     outputBeam = inputBeam.copy()
+#     x = inputBeam.x - np.mean(inputBeam.x)
+#     y = inputBeam.y - np.mean(inputBeam.y)
+#     gamma = inputBeam.gamma
+#     gamma0 = np.mean(inputBeam.gamma)
+#     t = inputBeam.t-np.mean(inputBeam.t);
+#     # Calculated parameters
+#     lambda_r = lambdaw / 2 / gamma0**2 * (1 + K**2 / 2)  # Assumes planar undulator
+#     omega = 2 * np.pi * 299792458 / lambda_r  # Resonant frequency
+#     JJ = besselj(0, K**2 / (4 + 2 * K**2)) - besselj(1, K**2 / (4 + 2 * K**2))
+#     totalLaserEnergy = np.sqrt(2 * np.pi * sigmat_laser**2) * Plaser
+#     # Laser is assumed Gaussian with peak power Plaser
+#     # This formula from eq. 8 Huang PRSTAB 074401 2004
+#     mod_amplitude = np.sqrt(Plaser / 8.7e9) * K * lambdaw * Nwig / gamma0 / sigmar_laser * JJ
+#     #print(mod_amplitude / np.sqrt(Plaser))
+#     # offset = 1.0  # temporal offset between laser and e-beam in units of laser wavelengths
+#     # Calculate induced modulation deltagamma
+#     deltagamma = mod_amplitude * np.exp(-0.25 * (x**2 + y**2) / sigmar_laser**2) * \
+#                  np.sin(omega * t + offset * 2 * np.pi) * \
+#                  np.exp(-0.5 * ((t - offset * sigmat_laser) / sigmat_laser)**2)
+#     outputBeam.gamma = inputBeam.gamma + deltagamma
+#     return outputBeam, deltagamma, t
+
+
 def addLHmodulation(
     inputBeam, 
-    #Elaser, 
-    showplots=False,
-    laserHeater_laserEnergy = 0.5e-3,
-    laserHeater_sigma_t =  (2 / 2.355) * 1e-12,
-    laserHeater_offset = -0.5
+    Elaser = None, 
+    PowerProfile=None, 
+    tvector=None, 
+    case='Gaussian', 
+    sigmat_laser=None, 
+    offset=None, 
+    showplots=False
 ):
-    """ From C. Emma, 2024-08-23 """
+    """Impose an energy modulation from a *laser heater* (LH) on an electron beam.
+
+    The routine supports two use-cases that mirror how the FACET-II LH is
+    typically modelled:
+
+    * **Gaussian** (default) – The laser pulse is assumed to have a
+      temporally-Gaussian power profile with total pulse energy ``Elaser``.
+    * **arbitrary** – An arbitrary temporal power profile is supplied via
+      ``PowerProfile``/``tvector``
+
+    In both cases the laser is assumed transversely Gaussian with a
+    hard-coded rms laser spot size and the undulator/LH hardware parameters
+    installed at FACET-II.
+
+    From C. Emma
+
+    Parameters
+    ----------
+    inputBeam : ParticleGroup beam
+
+    Elaser : float
+        Laser pulse energy *[J]*.  Used only when ``case == 'Gaussian'``.
+        
+    PowerProfile : list, optional
+        Instantaneous laser power *[W]* sampled at the points given by
+        ``tvector``.  Required when ``case == 'arbitrary'``.
+    
+    tvector : list, optional
+        Time grid *[s]* associated with ``PowerProfile``.  Required when
+        ``case == 'arbitrary'``.
+        
+    case : {'Gaussian', 'arbitrary'}, default 'Gaussian'
+        Choice of temporal profile model.
+        
+    sigmat_laser : float, optional
+        Rms laser pulse length *[s]* for the Gaussian case.  If omitted,
+        a 6 ps (FWHM) pulse is assumed.
+        
+    offset : float, optional
+        Temporal offset *[s]* between the laser pulse centre and
+        ``np.mean(inputBeam.t)`` in the Gaussian case.  Defaults to ``0``.
+    
+    showplots : bool
+        Print plots
+
+    Returns
+    -------
+    outputBeam : ParticleGroup beam
+        Input beam with modulation applied
+    deltagamma : ndarray
+        Per-particle induced energy deviation ``Δγ``.
+    t : ndarray
+        The mean-subtracted time coordinate that was used in the modulation
+        calculation (identical to ``inputBeam.t - np.mean(inputBeam.t)``).
+
+    """
+
+    
     # Hardcode FACET-II laser and undulator parameters
-    # Laser parameters
-    Elaser = laserHeater_laserEnergy
     lambda_laser = 760e-9
     sigmar_laser = 200e-6
-    sigmat_laser = laserHeater_sigma_t # (2 / 2.355) * 1e-12
-    Plaser = Elaser / np.sqrt(2 * np.pi * sigmat_laser**2)
-    offset = laserHeater_offset #-0.5  # laser to e-beam offset if you want you can add it
-    # Undulator parameters
     K = 1.1699
     lambdaw = 0.054
     Nwig = 9
-    # Electron beam
-    outputBeam = inputBeam.copy()
+    
+    # Electron beam calculations
     x = inputBeam.x - np.mean(inputBeam.x)
     y = inputBeam.y - np.mean(inputBeam.y)
-    gamma = inputBeam.gamma
-    gamma0 = np.mean(inputBeam.gamma)
     t = inputBeam.t-np.mean(inputBeam.t);
-    # Calculated parameters
-    lambda_r = lambdaw / 2 / gamma0**2 * (1 + K**2 / 2)  # Assumes planar undulator
-    omega = 2 * np.pi * 299792458 / lambda_r  # Resonant frequency
-    JJ = besselj(0, K**2 / (4 + 2 * K**2)) - besselj(1, K**2 / (4 + 2 * K**2))
-    totalLaserEnergy = np.sqrt(2 * np.pi * sigmat_laser**2) * Plaser
-    # Laser is assumed Gaussian with peak power Plaser
-    # This formula from eq. 8 Huang PRSTAB 074401 2004
-    mod_amplitude = np.sqrt(Plaser / 8.7e9) * K * lambdaw * Nwig / gamma0 / sigmar_laser * JJ
-    #print(mod_amplitude / np.sqrt(Plaser))
-    # offset = 1.0  # temporal offset between laser and e-beam in units of laser wavelengths
-    # Calculate induced modulation deltagamma
-    deltagamma = mod_amplitude * np.exp(-0.25 * (x**2 + y**2) / sigmar_laser**2) * \
-                 np.sin(omega * t + offset * 2 * np.pi) * \
-                 np.exp(-0.5 * ((t - offset * sigmat_laser) / sigmat_laser)**2)
-    outputBeam.gamma = inputBeam.gamma + deltagamma
-    return outputBeam, deltagamma, t
+    gamma = inputBeam.gamma
+    gamma0 = np.nanmean(inputBeam.gamma)     
 
+    if gamma0 == 0 or np.isnan(gamma0):
+        print("Warning: gamma0 is either zero or NaN. Returning None.")
+        return None    
+
+    # Calculated parameters for arbitrary case
+    lambda_r = lambdaw / (2 * gamma0**2) * (1 + K**2 / 2)
+    omega = 2 * np.pi * 299792458 / lambda_r
+    JJ = besselj(0, K**2 / (4 + 2 * K**2)) - besselj(1, K**2 / (4 + 2 * K**2))
+
+    if case == 'arbitrary':
+        if PowerProfile is None or tvector is None:
+            raise ValueError("For 'arbitrary' case, both PowerProfile and tvector must be provided.")
+        
+        # Calculate the laser power profile normalized
+        PlaserPeak = np.max(PowerProfile)
+        normalizedPowerProfile = PowerProfile / PlaserPeak
+
+        # Laser parameters    
+        mod_amplitude = np.sqrt(PlaserPeak / 8.7e9) * K * lambdaw * Nwig / gamma0 / sigmar_laser * JJ
+
+        if np.isnan(mod_amplitude):
+            print("NaN value in LH mod_amplitude.")
+            return None
+
+        # Interpolate Power value at the location of the particle t
+        interpolation_function = interp1d(tvector, normalizedPowerProfile, kind='linear', fill_value='extrapolate')
+        PlaserInterp = interpolation_function(t)
+        
+        if np.any(np.isnan(PlaserInterp)):
+            print("NaN values found in PlaserInterp.")
+            return None
+
+        if showplots:
+            plt.scatter(t, PlaserInterp)
+            plt.title("Interpolated Laser Power")
+            plt.xlabel("Time")
+            plt.ylabel("Normalized Laser Power")
+            plt.show()
+
+        # Calculate induced modulation for arbitrary case - Laser is assumed transversely Gaussian 
+        deltagamma = mod_amplitude * np.sqrt(PlaserInterp) * \
+                     np.exp(-0.25 * (x**2 + y**2) / sigmar_laser**2) * np.sin(omega * t)
+        deltapz = deltagamma / gamma0
+
+    elif case == 'Gaussian':
+        # Set default values if not provided
+        if sigmat_laser is None:
+            sigmat_laser = (6 / 2.355) * 1e-12  # Default value for sigmat_laser
+        if offset is None:
+            offset = 0.0  # Default value for offset
+
+        Plaser = Elaser / np.sqrt(2 * np.pi * sigmat_laser**2)
+        
+        # Laser is assumed transversely Gaussian with peak power Plaser
+        mod_amplitude = np.sqrt(Plaser / 8.7e9) * K * lambdaw * Nwig / gamma0 / sigmar_laser * JJ
+        
+        # Calculate induced modulation for Gaussian case
+        deltagamma = mod_amplitude * np.exp(-0.25 * (x**2 + y**2) / sigmar_laser**2) * \
+                     np.sin(omega * t ) * \
+                     np.exp(-0.25 * ((t - offset ) / sigmat_laser)**2)
+
+    else:
+        raise ValueError("Invalid case provided. Use 'arbitrary' or 'Gaussian'.")
+
+    # Update the outputBeam with the new gamma values
+    outputBeam = inputBeam.copy()
+    outputBeam.gamma = inputBeam.gamma + deltagamma
+    
+    return outputBeam, deltagamma, t
+    
 def centerBeam(
     P,
     centerType = "median",

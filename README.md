@@ -63,7 +63,7 @@ Loading `UTILITY_quickstart.py` will import all the utility functions. These fun
 
 ### Core functions
 
-- `initializeTao()` – set up a Bmad/PyTao instance. Optionally run IMPACT‑T to create a beam or import a reference beam
+- `initializeTao()` – set up a Bmad/PyTao instance of the FACET-II beamline. Optionally run IMPACT‑T to create a beam or import a reference beam
 - `setLattice()` – apply lattice configuration to commonly changed knobs using a dictionary or reference file
 - `trackBeam()` – track a beam between arbitrary points in the lattice, applying specialized functions like centering or energy correction at checkpoints
 
