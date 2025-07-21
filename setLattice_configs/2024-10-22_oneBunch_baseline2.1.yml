@@ -1,0 +1,205 @@
+include: 
+- "setLattice_configs/defaults.yml"
+- "setLattice_configs/bounds.yml"
+
+
+####################
+########################################
+############################################################
+################################################################################
+####################################################################################################
+########################################################################################################################
+
+#2024-10-22: New IMPACT one-bunch
+
+########################################################################################################################
+####################################################################################################
+################################################################################
+############################################################
+########################################
+####################
+
+#2024-10-22-15-20-50 2024-10-22_oneBunch optimization on PR10571.
+    # twissCalculationFraction : 0.7
+    # PSystem_emitSI_x : 2.7609e-6
+    # PSystem_emitSI_y : 2.1442e-6
+    # PSystem_norm_emit_x : 1.2512e-6
+    # PSystem_norm_emit_y : 1.0193e-6
+    # PSystem_BMAG_x : 1.0001451679
+    # PSystem_BMAG_y : 1.0001521435
+    # PSystem_BMAG_emit_x : 1.2514e-6
+    # PSystem_BMAG_emit_y : 1.0195e-6
+    # PSystem_BMAG_emitSI_x : 2.7613e-6
+    # PSystem_BMAG_emitSI_y : 2.1446e-6
+inputBeamFilePathSuffix : '/beams/2024-10-22_Impact_OneBunch/2024-10-22_oneBunch.h5'
+bunchCount : 1
+QA10361kG : -3.1976079537
+QA10371kG : 3.1129092742
+QE10425kG : -6.8469996218
+QE10441kG : 1.5057761462
+QE10511kG : 7.0138622173
+QE10525kG : -5.3942250594
+L0BPhaseSet : -15.0
+L0BEnergyOffset : -2759313 #2024-10-22_oneBunch comes out of L0A just at a tiny bit higher energy. Compensate in L0B to get to the design 125 MeV
+
+
+#2024-10-22_oneBunch_baseline2.1.yml
+#PENDING One bunch, CSR-on optimization of PENT size
+#Similar to 2024-10-22_oneBunch_baseline2 but with centering disabled
+centerBC14 : False
+centerBC20 : False
+centerMFFF : False
+assertBC14Energy : False
+assertBC20Energy : False
+symmetricSextupoleStrengths : True
+# L1PhaseSet : -22.7174618909
+# L2PhaseSet : -37.6578980484
+# L2EnergyOffset : 8.2386046404423714e+7
+# L3EnergyOffset : 2.3171609842974335e+7
+# S1ELkG : 1403.089258397
+# S2ELkG : -3273.2318092375
+# S3ELkG : -1517.2051034261
+# S1EL_xOffset : -0.0003760687
+# S1EL_yOffset : -0.0001515239
+# S2EL_xOffset : -0.000671957
+# S2EL_yOffset : -0.000120215
+# S2ER_xOffset : 0.0006079298
+# S2ER_yOffset : -0.0001464746
+# S1ER_xOffset : 0.0029132511
+# S1ER_yOffset : -0.0002317049
+
+# XC1FFkG : 0.1598777298
+# XC3FFkG : -0.0848927371
+# YC1FFkG : -0.0042030632
+# YC2FFkG : 0.018974898
+
+#2025-07-12-15-30-09 Work in progress
+#Just tried to go directly from baseline_2 but plateaued
+# L1PhaseSet : -22.3750954545
+# L2PhaseSet : -37.8635993533
+# L2EnergyOffset : 6.4000814080655836e+7
+# L3EnergyOffset : -5.8591739505161725e+7
+# S1ELkG : 1378.8782296373
+# S2ELkG : -4157.5645750302
+# S3ELkG : -1502.0908833732
+# S1EL_xOffset : -0.0003313873
+# S1EL_yOffset : -0.0001298229
+# S2EL_xOffset : -0.0004383485
+# S2EL_yOffset : 0.0001082302
+# S2ER_xOffset : 0.000731261
+# S2ER_yOffset : -0.0003835903
+# S1ER_xOffset : 0.0031819664
+# S1ER_yOffset : -0.0007979474
+# XC1FFkG : 0.180242515
+# XC3FFkG : -0.0886448777
+# YC1FFkG : -0.0089801648
+# YC2FFkG : 0.0114750389
+# 27 x 14 x 18 um. Nice LPS.
+
+#2025-07-18-09-16-18
+#Optimizing CSR off first, then back on
+# L1PhaseSet : -18.1802023234
+# L2PhaseSet : -35.4301033002
+# L2EnergyOffset : 8.4461767079655588e+7
+# L3EnergyOffset : 2.0143620701134957e+7
+# S1ELkG : 1093.8679763671
+# S2ELkG : -3579.3910768598
+# S3ELkG : -1428.8371808467
+# S1EL_xOffset : -0.0022111683
+# S1EL_yOffset : -0.0006811692
+# S2EL_xOffset : -0.000535102
+# S2EL_yOffset : -0.0004444283
+# S2ER_xOffset : 0.0006103662
+# S2ER_yOffset : -0.0001200972
+# S1ER_xOffset : 0.0004419131
+# S1ER_yOffset : -0.0003613742
+# XC1FFkG : 0.0251093703
+# XC3FFkG : -0.0171330139
+# YC1FFkG : 0.0026297515
+# YC2FFkG : -0.004964754
+#26 x 6 x 14 um at PENT
+
+#2024-10-22_oneBunch_baseline2.yml
+#2025-01-13-10-33-10 One bunch, CSR-on optimization of PENT size
+#From golden, now with assertBC14 and 20 enabled
+# centerBC14 : True
+# centerBC20 : True
+# centerMFFF : True
+# assertBC14Energy : True
+# assertBC20Energy : True
+# symmetricSextupoleStrengths : True
+# L1PhaseSet : -22.1126373302
+# L2PhaseSet : -39.4306903453
+# S1ELkG : 1402.0472215805
+# S2ELkG : -3076.415811475
+# S3ELkG : -1512.4701228732
+# S1EL_xOffset : -0.0003918177
+# S1EL_yOffset : -0.0001528183
+# S2EL_xOffset : -0.0006814372
+# S2EL_yOffset : -0.0000919132
+# S2ER_xOffset : 0.0006375856
+# S2ER_yOffset : -0.0001328972
+# S1ER_xOffset : 0.0029259191
+# S1ER_yOffset : -0.0002031175
+#Gives 18 x 11 x 14 at PENT
+
+
+# L1PhaseSet : -22.1126373302
+# L2PhaseSet : -39.4306903453
+# L2EnergyOffset : -1.06276578442159876e+8
+# L3EnergyOffset : 1.65331746625958055e+8
+# # S1ELkG : 1491.7257876133
+# # S2ELkG : -3190.1625723027
+# # S3ELkG : -1155.4592527962
+
+# L2EnergyOffset : -1.64284791411974043e+8
+# L3EnergyOffset : 1.45100788615697414e+8
+# # S1ELkG : 1466.194220636
+# # S2ELkG : -4561.1987722637
+# # S3ELkG : -730.2135821884
+
+
+#Center for now to remove kickers
+# centerMFFF : True
+# S1ELkG : 1441.195248583
+# S2ELkG : -4552.4301664835
+# S3ELkG : -720.3167956059
+# S1EL_xOffset : 0.0001065623
+# S1EL_yOffset : 0.0000251074
+# S2EL_xOffset : 0.0000238962
+# S2EL_yOffset : -0.0000389851
+# S2ER_xOffset : 0.0000179021
+# S2ER_yOffset : -0.0000524319
+# S1ER_xOffset : 0.0000591312
+# S1ER_yOffset : -0.0000459675
+# XC1FFkG : 0.001159991
+# XC3FFkG : 0.0005559137
+# YC1FFkG : 0.0027985182
+# YC2FFkG : -0.0018564843
+
+
+#2025-07-20-13-45-14 Clean start
+#Center for now to remove kickers
+centerMFFF : True
+#L1 and L2 from _baseline2
+L1PhaseSet : -22.1126373302
+L2PhaseSet : -39.4306903453
+# Offsets required to get to 4.5 and 10.0 GeV, holding L1 and L2 constant from _baseline2
+L2EnergyOffset : 86.0e+6
+L3EnergyOffset : 81.0e+6
+
+#Messing with BC20 launch quads (alone) didn't seem to do much
+
+
+
+S1ELkG : 1402.0472215805
+S2ELkG : -3076.415811475
+S3ELkG : -1512.4701228732
+S1EL_xOffset : -0.0003816395
+S1EL_yOffset : -0.0000552555
+S2EL_xOffset : -0.0006574697
+S2EL_yOffset : -0.0001532337
+S2ER_xOffset : 0.0012283229
+S2ER_yOffset : -0.0000469471
+S1ER_xOffset : 0.0023857632
+S1ER_yOffset : -0.0002224618
