@@ -44,34 +44,52 @@ L0BEnergyOffset : -2759313 #2024-10-22_oneBunch comes out of L0A just at a tiny 
 
 
 #2024-10-22_oneBunch_baseline2.1.yml
-#PENDING One bunch, CSR-on optimization of PENT size
-#Similar to 2024-10-22_oneBunch_baseline2 but with centering disabled
-centerBC14 : False
-centerBC20 : False
-centerMFFF : False
-assertBC14Energy : False
-assertBC20Energy : False
-symmetricSextupoleStrengths : True
-# L1PhaseSet : -22.7174618909
-# L2PhaseSet : -37.6578980484
-# L2EnergyOffset : 8.2386046404423714e+7
-# L3EnergyOffset : 2.3171609842974335e+7
-# S1ELkG : 1403.089258397
-# S2ELkG : -3273.2318092375
-# S3ELkG : -1517.2051034261
-# S1EL_xOffset : -0.0003760687
-# S1EL_yOffset : -0.0001515239
-# S2EL_xOffset : -0.000671957
-# S2EL_yOffset : -0.000120215
-# S2ER_xOffset : 0.0006079298
-# S2ER_yOffset : -0.0001464746
-# S1ER_xOffset : 0.0029132511
-# S1ER_yOffset : -0.0002317049
+#2025-07-22-15-39-24 One bunch, CSR-on optimization of PENT size
+#Similar to 2024-10-22_oneBunch_baseline2 but with centering and energy asserts disabled
+# centerBC14 : False
+# centerBC20 : False
+# centerMFFF : False
+# assertBC14Energy : False
+# assertBC20Energy : False
+# symmetricSextupoleStrengths : True
+# L1PhaseSet : -22.9614250435
+# L2PhaseSet : -37.7280352157
+# L2EnergyOffset : 4.378626287576712e+6
+# L3EnergyOffset : 1.7422482364347808e+7
+# Q19851kG : -63.5400207281
+# Q19871kG : 44.5709673607
+# S1ELkG : 1390.6467926357
+# S2ELkG : -3835.3137076092
+# S3ELkG : -1499.2793181765
+# S1EL_xOffset : -0.0003016932
+# S1EL_yOffset : -0.0001618887
+# S2EL_xOffset : -0.0007816668
+# S2EL_yOffset : -0.0000323417
+# S2ER_xOffset : 0.0007385236
+# S2ER_yOffset : -0.0001116775
+# S1ER_xOffset : 0.0029610112
+# S1ER_yOffset : -0.0002052779
+# XC1FFkG : 0.0104706742
+# XC3FFkG : 0.0011510288
+# YC1FFkG : -0.0017169003
+# YC2FFkG : -0.0000839404
+# 28 x 11 x 11 um at PENT
 
-# XC1FFkG : 0.1598777298
-# XC3FFkG : -0.0848927371
-# YC1FFkG : -0.0042030632
-# YC2FFkG : 0.018974898
+####################
+########################################
+############################################################
+################################################################################
+####################################################################################################
+########################################################################################################################
+
+# Development work. All commented out
+
+########################################################################################################################
+####################################################################################################
+################################################################################
+############################################################
+########################################
+####################
 
 #2025-07-12-15-30-09 Work in progress
 #Just tried to go directly from baseline_2 but plateaued
@@ -178,28 +196,119 @@ symmetricSextupoleStrengths : True
 # YC2FFkG : -0.0018564843
 
 
-#2025-07-20-13-45-14 Clean start
-#Center for now to remove kickers
-centerMFFF : True
-#L1 and L2 from _baseline2
-L1PhaseSet : -22.1126373302
-L2PhaseSet : -39.4306903453
-# Offsets required to get to 4.5 and 10.0 GeV, holding L1 and L2 constant from _baseline2
-L2EnergyOffset : 86.0e+6
-L3EnergyOffset : 81.0e+6
+# #2025-07-20-13-45-14 Clean start
+# #Center for now to remove kickers
+# centerMFFF : True
+# #L1 and L2 from _baseline2
+# L1PhaseSet : -22.1126373302
+# L2PhaseSet : -39.4306903453
+# # [CSR on] Offsets required to get to 4.5 and 10.0 GeV, holding L1 and L2 constant from _baseline2
+# #L2EnergyOffset : 86.0e+6
+# #L3EnergyOffset : 81.0e+6
+# # [CSR on] With settings above, these kickers settings center the beam at BEGBC20 to within 1 um and 1 urad (off by ~100 um in x without these)
+# # WARNING! DO NOT USE. Causes something awful to happen... not understood
+# # XC19802kG : XXXX
+# # XC19900kG : XXXX
+#     #My thinking is that it's something wrong with the number of steps in the linac model and this kicker is overlaid on it...
 
-#Messing with BC20 launch quads (alone) didn't seem to do much
+# centerBC14 : True
+# centerBC20 : True
+ 
+# #Messing with BC20 launch quads (alone) didn't seem to help much
+
+# S1ELkG : 1402.0472215805
+# S2ELkG : -3076.415811475
+# S3ELkG : -1512.4701228732
+# S1EL_xOffset : -0.0003918177
+# S1EL_yOffset : -0.0001528183
+# S2EL_xOffset : -0.0006814372
+# S2EL_yOffset : -0.0000919132
+# S2ER_xOffset : 0.0006375856
+# S2ER_yOffset : -0.0001328972
+# S1ER_xOffset : 0.0029259191
+# S1ER_yOffset : -0.0002031175
 
 
+#2025-07-22-10-29-47 Reasonable checkpoint; LPS fine. Centering on, energy asserts off
+# centerBC14 : True
+# centerBC20 : True
+# centerMFFF : True
+# assertBC14Energy : False
+# assertBC20Energy : False
+# symmetricSextupoleStrengths : True
+# L1PhaseSet : -22.7612809091
+# L2PhaseSet : -37.942832848
+# L2EnergyOffset : 6.210073597200833e6
+# L3EnergyOffset : 1.7788502640891682e7
+# Q19851kG : -63.2934765379
+# Q19871kG : 44.9594744838
+# S1ELkG : 1390.5751121713
+# S2ELkG : -3786.1299212712
+# S3ELkG : -1509.7977052464
+# S1EL_xOffset : -0.0003137825
+# S1EL_yOffset : -0.000175772
+# S2EL_xOffset : -0.000790368
+# S2EL_yOffset : -0.0000462533
+# S2ER_xOffset : 0.0007216283
+# S2ER_yOffset : -0.000132772
+# S1ER_xOffset : 0.0029279077
+# S1ER_yOffset : -0.0002102793
 
-S1ELkG : 1402.0472215805
-S2ELkG : -3076.415811475
-S3ELkG : -1512.4701228732
-S1EL_xOffset : -0.0003816395
-S1EL_yOffset : -0.0000552555
-S2EL_xOffset : -0.0006574697
-S2EL_yOffset : -0.0001532337
-S2ER_xOffset : 0.0012283229
-S2ER_yOffset : -0.0000469471
-S1ER_xOffset : 0.0023857632
-S1ER_yOffset : -0.0002224618
+# centerBC14 : False
+# centerBC20 : False
+# centerMFFF : False
+# assertBC14Energy : False
+# assertBC20Energy : False
+# symmetricSextupoleStrengths : True
+# L1PhaseSet : -22.7612809091
+# L2PhaseSet : -37.942832848
+# L2EnergyOffset : 6.210073597200833e+6
+# L3EnergyOffset : 1.7788502640891682e+7
+# Q19851kG : -63.2934765379
+# Q19871kG : 44.9594744838
+# S1ELkG : 1390.5751121713
+# S2ELkG : -3786.1299212712
+# S3ELkG : -1509.7977052464
+# S1EL_xOffset : -0.0003137825
+# S1EL_yOffset : -0.000175772
+# S2EL_xOffset : -0.000790368
+# S2EL_yOffset : -0.0000462533
+# S2ER_xOffset : 0.0007216283
+# S2ER_yOffset : -0.000132772
+# S1ER_xOffset : 0.0029279077
+# S1ER_yOffset : -0.0002102793
+# XC1FFkG : 0.0109979568
+# XC3FFkG : 0.0012425331
+# YC1FFkG : -0.0008080307
+# YC2FFkG : 0.0007242683
+
+#Hrm, not sure I like changing the BC20 launch quads
+
+# 2025-07-23-07-05-33 Checkpoint
+centerBC14 : False
+centerBC20 : False
+centerMFFF : False
+assertBC14Energy : False
+assertBC20Energy : False
+symmetricSextupoleStrengths : True
+L1PhaseSet : -24.34044794
+L2PhaseSet : -38.429397828
+L1EnergyOffset : -381334.8928250682
+L2EnergyOffset : -1.5784434857955808e6
+L3EnergyOffset : 6.6028306228950545e7
+S1ELkG : 1395.1387036651
+S2ELkG : -3114.8645605482
+S3ELkG : -1500.9524399572
+S1EL_xOffset : -0.0003165131
+S1EL_yOffset : -0.0000799814
+S2EL_xOffset : -0.000736708
+S2EL_yOffset : -0.0000573645
+S2ER_xOffset : 0.0007185437
+S2ER_yOffset : -0.0001068388
+S1ER_xOffset : 0.0028395311
+S1ER_yOffset : -0.000137758
+XC1FFkG : 0.007257152
+XC3FFkG : -0.0010001494
+YC1FFkG : -0.0003479778
+YC2FFkG : 0.0008955185
+# 31 x 12 x 23 um. Sane LPS and emittances

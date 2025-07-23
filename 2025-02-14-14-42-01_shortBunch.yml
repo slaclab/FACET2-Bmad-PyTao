@@ -1,0 +1,80 @@
+include: 
+- "setLattice_configs/defaults.yml"
+- "setLattice_configs/bounds.yml"
+
+
+####################
+########################################
+############################################################
+################################################################################
+####################################################################################################
+########################################################################################################################
+
+#2024-10-22: New IMPACT one-bunch
+
+########################################################################################################################
+####################################################################################################
+################################################################################
+############################################################
+########################################
+####################
+
+#2024-10-22-15-20-50 2024-10-22_oneBunch optimization on PR10571.
+    # twissCalculationFraction : 0.7
+    # PSystem_emitSI_x : 2.7609e-6
+    # PSystem_emitSI_y : 2.1442e-6
+    # PSystem_norm_emit_x : 1.2512e-6
+    # PSystem_norm_emit_y : 1.0193e-6
+    # PSystem_BMAG_x : 1.0001451679
+    # PSystem_BMAG_y : 1.0001521435
+    # PSystem_BMAG_emit_x : 1.2514e-6
+    # PSystem_BMAG_emit_y : 1.0195e-6
+    # PSystem_BMAG_emitSI_x : 2.7613e-6
+    # PSystem_BMAG_emitSI_y : 2.1446e-6
+inputBeamFilePathSuffix : '/beams/2024-10-22_Impact_OneBunch/2024-10-22_oneBunch.h5'
+bunchCount : 1
+QA10361kG : -3.1976079537
+QA10371kG : 3.1129092742
+QE10425kG : -6.8469996218
+QE10441kG : 1.5057761462
+QE10511kG : 7.0138622173
+QE10525kG : -5.3942250594
+L0BPhaseSet : -15.0
+L0BEnergyOffset : -2759313 #2024-10-22_oneBunch comes out of L0A just at a tiny bit higher energy. Compensate in L0B to get to the design 125 MeV
+
+
+
+
+
+#2025-02-14-14-42-01 One bunch, CSR on. Minimizing bunch length at the cost of everything else
+#Allow asym sextupoles. Allow BC20 quads but not FF quads
+centerBC14 : True
+centerBC20 : True
+centerMFFF : True
+assertBC14Energy : True
+assertBC20Energy : True
+symmetricSextupoleStrengths : False
+L1PhaseSet : -27.5610187417
+L2PhaseSet : -41.5127864262
+Q1EkG : 135.4574291922
+Q2EkG : -154.679536731
+Q3EkG : 113.7172177105
+Q4EkG : 133.1584326584
+Q5EkG : -17.2167734004
+Q6EkG : -150.9617036705
+S1ELkG : 1062.6340390643
+S2ELkG : -5581.4502261498
+S3ELkG : -598.8043221569
+S3ERkG : -829.9974849771
+S2ERkG : -5243.6986958889
+S1ERkG : 267.2539993953
+S1EL_xOffset : 0.0002425131
+S1EL_yOffset : 0.0000474352
+S2EL_xOffset : 0.0003922771
+S2EL_yOffset : -0.0000482662
+S2ER_xOffset : 0.0001984301
+S2ER_yOffset : 0.0000990938
+S1ER_xOffset : 0.0003678365
+S1ER_yOffset : 0.0001151889
+#Gets to 1.3 um bunch length with 1e5 particles but varies case-by-case
+

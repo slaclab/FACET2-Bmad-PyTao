@@ -70,6 +70,11 @@ def setLattice(
                            latticeSettings["Q19851kG"], 
                            latticeSettings["Q19871kG"]
                           )
+
+    # setWChicaneLaunchKickers(tao, 
+    #                    latticeSettings["XC19802kG"], 
+    #                    latticeSettings["XC19900kG"]
+    #                   )
     
     setAllWChicaneBends(tao, 
                         latticeSettings["B1EkG"], 
@@ -386,3 +391,10 @@ def setWChicaneLaunchQuads(tao, Q19851kG, Q19871kG):
     setQuadkG(tao, "Q19871", Q19871kG)
 
     return
+
+# def setWChicaneLaunchKickers(tao, XC19802kG, XC19900kG):
+    
+#     setKickerkG(tao, "XC19802", XC19802kG)
+#     setKickerkG(tao, "XC19900", XC19900kG)
+
+#     return

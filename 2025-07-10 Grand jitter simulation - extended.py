@@ -144,7 +144,7 @@ def worker(config):
     elif config["startingPoint"] == "OneBunchA":
         importedDefaultSettings = loadConfig("setLattice_configs/2024-10-22_oneBunch_baseline3.yml")
     elif config["startingPoint"] == "OneBunchB":
-        importedDefaultSettings = loadConfig("setLattice_configs/2024-10-22_oneBunch_baseline2.yml")
+        importedDefaultSettings = loadConfig("setLattice_configs/2024-10-22_oneBunch_baseline2.1.yml")
     else:
         print("Illegal starting point")
         return

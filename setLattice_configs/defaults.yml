@@ -20,6 +20,10 @@ QE10525kG :  -4.91438
 Q19851kG : -64.095
 Q19871kG : 44.936
 
+# #Last HKICKERs before BEGBC20
+# XC19802kG : 0.0
+# XC19900kG : 0.0
+
 #These bend settings are from the official lattice, as of 2024-05-20    
 #bendNameList :  ["B1LE", "B2LE", "B3LE", "B3RE", "B2RE", "B1RE"]
 #[(i, getBendkG(tao,i)) for i in bendNameList]
